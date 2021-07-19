@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface ChouilleRepository extends JpaRepository<Chouille, Long> {
 
     public Optional<Chouille> findById(Long id);
+  //  public List<Chouille> findByName(String name);
 }
