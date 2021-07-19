@@ -33,4 +33,24 @@ public class PersonService {
             throw new NotFoundException("Cet utilisateur n'existe pas");
         }
     }
+    public Person editPerson(long id,Person person) throws NotFoundException{
+        if(person.getName() == null || person.getName().isEmpty()){
+            throw new BadRequestException("Input values can't be empty");
+        }
+        Person modifiedPerson = repository.findById(id).orElseThrow(()->new NotFoundException("ce client n'existe pas"));
+        modifiedPerson.setName(person.getName());
+
+        repository.save(modifiedPerson);
+        return modifiedPerson;
+    }
+
+
+    public ResponseEntity<String> deletePerson(long id) throws NotFoundException {
+        Person person = this.getPerson(id);
+        repository.delete(person);
+        return ResponseEntity.status(HttpStatus.OK).body("Le client ("+person.getName()+") a bien été supprimé");
+    }
+
+
+
 }
