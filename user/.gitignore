@@ -36,3 +36,4 @@ build/
 
 user/src/main/resources/application.yml
 
+.idea
