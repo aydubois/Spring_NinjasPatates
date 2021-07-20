@@ -3,9 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="profil"></title>
+    <th:block th:insert="~{fragments/header :: link}"></th:block>
 </head>
 <body>
-<!--<div th:replace="~{fragments/header :: header1}"></div>-->
+
+<div th:replace="~{fragments/header :: header1}"></div>
+<main>
+    <section>
+        <!--TODO: Décommenter dès quand aura injecter les datas - attention aux /> > de fin de balise -->
+        <form
+             action="#"
+              th:action="@{/person/put/{id}(id=${person.id})}"
+              th:method="put"
+              th:object="${person}" >
+
+            <label for="name">Modifier mon nom :</label>
+            <input id="name" type="text" placeholder="Nom"
+                   th:field="*{name}" />
+            <input type="submit" value="modifier" />
+        </form>
+    </section>
+    <section>
+        <h2>Gestion des lieux de Chouilles</h2>
+        <!--<th:block th:each="location, state : ${locations}">
+            <form>
+                &lt;!&ndash; action="#"
+                 th:action="@{/location/put/{id}(id=${location.id})}"
+                 th:method="put"
+                 th:object="${location}" > &ndash;&gt;
+                <div>
+                    <label for="address_${state.index}">Adresse :</label>
+                    <input id="address_${state.index}" type="text" placeholder="7, rue de la soif 37000 Tours" th:field="*{Adress}"/>
+                </div>
+                <div>
+                    <label for="nbmax_${state.index}">Nombre de personnes maximal</label>
+                    <input id="nbmax_${state.index}" type="number" placeholder="6"/>
+                </div>
+                <button> Supprimer</button>
+            </form>
+        </th:block>
+        <form>
+            &lt;!&ndash; action="#"
+             th:action="@{/location/post"
+             th:method="post"
+             th:object="${location}" > &ndash;&gt;
+            <div>
+                <label for="address">Adresse :</label>
+                <input id="address" type="text" placeholder="7, rue de la soif 37000 Tours" th:field="*{Adress}"/>
+            </div>
+            <div>
+                <label for="nb-max">Nombre de personnes maximal</label>
+                <input id="nb-max" type="number" placeholder="6"/>
+            </div>
+            <button> Supprimer</button>
+        </form>-->
+
+    </section>
+    <section></section>
+</main>
 <!-- <h1 th:text="${person.name}"></h1>-->
     <ul class="card list">
        <!-- <li><b>Reference: </b><span th:utext="${person.id}"></span></li>
