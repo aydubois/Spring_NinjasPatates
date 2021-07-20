@@ -1,7 +1,11 @@
 package org.abr.audreybr.controller;
 
 import javassist.NotFoundException;
+import org.abr.audreybr.entity.Chouille;
+import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.entity.Person;
+import org.abr.audreybr.service.ChouilleService;
+import org.abr.audreybr.service.LocationService;
 import org.abr.audreybr.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +19,26 @@ import java.util.List;
 public class ViewController {
 
     @Autowired
-    private PersonService service;
+    private PersonService servicePerson;
+    @Autowired
+    private LocationService serviceLocation;
+    @Autowired
+    private ChouilleService serviceChouille;
 
     @GetMapping(path = "/profil")
     public String index(Model model) throws NotFoundException {
-        Person person = service.getPerson(1);
+        Person person = servicePerson.getPerson(1);
         model.addAttribute("person",person);
+        /*TODO : Il faut aussi rajouter tous les lieux lié à la personne + 3 dernières chouilles passées */
+        List<Location> locations = serviceLocation.getAll();
+        model.addAttribute("locations", locations);
+        List<Chouille> chouilles = serviceChouille.getAll();
+        model.addAttribute("chouilles", chouilles);
         return "profil";
+    }
+    @PutMapping(path ="/location/put/{id}")
+    public void test(@PathVariable long id){
+
     }
     @GetMapping(path = "/chouilles/mine")
     public String index2(){
