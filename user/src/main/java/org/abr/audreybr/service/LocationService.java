@@ -1,5 +1,6 @@
 package org.abr.audreybr.service;
 
+import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.exception.BadRequestException;
 import javassist.NotFoundException;
 import org.abr.audreybr.dao.LocationRepository;
@@ -22,17 +23,36 @@ public class LocationService {
         return repository.findAll();
     }
 
-    public Location getLocation(long id) throws NotFoundException {
-        return repository.findById(id).orElseThrow(()->new NotFoundException("Cette location n'existe pas"));
-    }
-
-    public Location editLocation(long id,Location location) throws NotFoundException{
-        if(location.getId() == null ){
+    public Location create(Location location) {
+        if (location.getAdress() == null ||
+                location.getMax_Pers() == null ||
+                location.getId_Person_Host() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
-        Location modifiedLocation = repository.findById(id).orElseThrow(()->new NotFoundException("cette location n'existe pas"));
-        modifiedLocation.setMax_Pers(location.getMax_Pers());
+
+        Location newLocation = new Location();
+
+        newLocation.setAdress(location.getAdress());
+        newLocation.setMax_Pers(location.getMax_Pers());
+        newLocation.setId_Person_Host(location.getId_Person_Host());
+
+        repository.save(newLocation);
+        return newLocation;
+    }
+
+    public Location getLocation(long id) throws NotFoundException {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette location n'existe pas"));
+    }
+
+    public Location editLocation(long id, Location location) throws NotFoundException {
+        if (location.getId_Location() == null) {
+            throw new BadRequestException("Input values can't be empty");
+        }
+        Location modifiedLocation = repository.findById(id).orElseThrow(() -> new NotFoundException("cette location n'existe pas"));
+
         modifiedLocation.setAdress(location.getAdress());
+        modifiedLocation.setMax_Pers(location.getMax_Pers());
+        modifiedLocation.setId_Person_Host(location.getId_Person_Host());
 
         repository.save(modifiedLocation);
         return modifiedLocation;
@@ -42,9 +62,8 @@ public class LocationService {
     public ResponseEntity<String> deleteLocation(long id) throws NotFoundException {
         Location location = this.getLocation(id);
         repository.delete(location);
-        return ResponseEntity.status(HttpStatus.OK).body("La location ("+location.getId()+") a bien été supprimé");
+        return ResponseEntity.status(HttpStatus.OK).body("La location (" + location.getId_Location() + ") a bien été supprimé");
     }
-
 
 
 }

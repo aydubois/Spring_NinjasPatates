@@ -1,5 +1,6 @@
 package org.abr.audreybr.service;
 
+import org.abr.audreybr.entity.Person;
 import org.abr.audreybr.exception.BadRequestException;
 import javassist.NotFoundException;
 import org.abr.audreybr.dao.PersonRepository;
@@ -21,6 +22,18 @@ public class PersonService {
     public List<Person> getAll() {
         return repository.findAll();
     }
+    public Person create(Person person) {
+        if (person.getName() == null ) {
+            throw new BadRequestException("Input values can't be empty");
+        }
+
+        Person newPerson = new Person();
+
+        newPerson.setName(person.getName());
+
+        repository.save(newPerson);
+        return newPerson;
+    }
 
     public Person getPerson(long id) throws NotFoundException {
         return repository.findById(id).orElseThrow(()->new NotFoundException("Cet utilisateur n'existe pas"));
@@ -38,6 +51,7 @@ public class PersonService {
             throw new BadRequestException("Input values can't be empty");
         }
         Person modifiedPerson = repository.findById(id).orElseThrow(()->new NotFoundException("ce client n'existe pas"));
+
         modifiedPerson.setName(person.getName());
 
         repository.save(modifiedPerson);

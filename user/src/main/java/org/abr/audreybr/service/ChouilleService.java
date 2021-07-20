@@ -22,17 +22,44 @@ public class ChouilleService {
         return repository.findAll();
     }
 
-    public Chouille getChouille(long id) throws NotFoundException {
-        return repository.findById(id).orElseThrow(()->new NotFoundException("Cette chouille n'existe pas"));
-    }
-
-    public Chouille editChouille(long id,Chouille chouille) throws NotFoundException{
-        if(chouille.getId() == null ){
+    public Chouille create(Chouille chouille) {
+        if (chouille.getThematic() == null || chouille.getThematic().isEmpty() ||
+                chouille.getDate() == null ||
+                chouille.getId_Location() == null ||
+                chouille.getId_Person_Sam() == null ||
+                chouille.getId_Person_Bouncer() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
-        Chouille modifiedChouille = repository.findById(id).orElseThrow(()->new NotFoundException("cette chouille n'existe pas"));
+
+        Chouille newChouille = new Chouille();
+
+        newChouille.setThematic(chouille.getThematic());
+        newChouille.setDate(chouille.getDate());
+        newChouille.setId_Location(chouille.getId_Location());
+        newChouille.setId_Person_Sam(chouille.getId_Person_Sam());
+        newChouille.setId_Person_Bouncer(chouille.getId_Person_Bouncer());
+        newChouille.setCode(chouille.getCode());
+
+        repository.save(newChouille);
+        return newChouille;
+    }
+
+    public Chouille getChouille(long id) throws NotFoundException {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette chouille n'existe pas"));
+    }
+
+    public Chouille editChouille(long id, Chouille chouille) throws NotFoundException {
+        if (chouille.getId_Chouille() == null) {
+            throw new BadRequestException("Input values can't be empty");
+        }
+        Chouille modifiedChouille = repository.findById(id).orElseThrow(() -> new NotFoundException("cette chouille n'existe pas"));
+
         modifiedChouille.setThematic(chouille.getThematic());
         modifiedChouille.setDate(chouille.getDate());
+        modifiedChouille.setId_Location(chouille.getId_Location());
+        modifiedChouille.setId_Person_Sam(chouille.getId_Person_Sam());
+        modifiedChouille.setId_Person_Bouncer(chouille.getId_Person_Bouncer());
+        modifiedChouille.setCode(chouille.getCode());
 
         repository.save(modifiedChouille);
         return modifiedChouille;
@@ -42,9 +69,8 @@ public class ChouilleService {
     public ResponseEntity<String> deleteChouille(long id) throws NotFoundException {
         Chouille chouille = this.getChouille(id);
         repository.delete(chouille);
-        return ResponseEntity.status(HttpStatus.OK).body("La chouille ("+chouille.getId()+") a bien été supprimé");
+        return ResponseEntity.status(HttpStatus.OK).body("La chouille (" + chouille.getId_Chouille() + ") a bien été supprimé");
     }
-
 
 
 }
