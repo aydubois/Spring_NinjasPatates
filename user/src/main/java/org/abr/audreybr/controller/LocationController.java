@@ -26,7 +26,7 @@ public class LocationController {
     }
 
     @GetMapping("/{id}")
-    public Location get(@PathVariable("id") long id) throws NotFoundException {
+    public Location get(@PathVariable("id") Integer id) throws NotFoundException {
         return locationService.getLocation(id);
     }
 
@@ -36,12 +36,12 @@ public class LocationController {
     }
 
     @PutMapping(path = "{id}")
-    public Location update(@PathVariable long id, @RequestBody Location location) throws NotFoundException {
+    public Location update(@PathVariable Integer id, @RequestBody Location location) throws NotFoundException {
         return locationService.editLocation(id,location);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) throws NotFoundException {
         return locationService.deleteLocation(id);
     }
 

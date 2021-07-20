@@ -26,7 +26,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Person get(@PathVariable("id") long id) throws NotFoundException {
+    public Person get(@PathVariable("id") Integer id) throws NotFoundException {
         return personService.getPerson(id);
     }
 
@@ -36,12 +36,12 @@ public class PersonController {
     }
 
     @PutMapping(path = "{id}")
-    public Person update(@PathVariable long id, @RequestBody Person person) throws NotFoundException {
+    public Person update(@PathVariable Integer id, @RequestBody Person person) throws NotFoundException {
         return personService.editPerson(id,person);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) throws NotFoundException {
         return personService.deletePerson(id);
     }
 

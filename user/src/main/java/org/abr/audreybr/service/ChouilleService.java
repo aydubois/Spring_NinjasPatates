@@ -44,11 +44,17 @@ public class ChouilleService {
         return newChouille;
     }
 
-    public Chouille getChouille(long id) throws NotFoundException {
+    public Chouille getChouille(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette chouille n'existe pas"));
     }
 
-    public Chouille editChouille(long id, Chouille chouille) throws NotFoundException {
+    public List<Chouille> getMyChouille(Integer id) throws NotFoundException {
+        return repository.getChouilleListById_Person_Host(id);
+    }
+
+
+
+    public Chouille editChouille(Integer id, Chouille chouille) throws NotFoundException {
         if (chouille.getId_Chouille() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
@@ -66,7 +72,7 @@ public class ChouilleService {
     }
 
 
-    public ResponseEntity<String> deleteChouille(long id) throws NotFoundException {
+    public ResponseEntity<String> deleteChouille(Integer id) throws NotFoundException {
         Chouille chouille = this.getChouille(id);
         repository.delete(chouille);
         return ResponseEntity.status(HttpStatus.OK).body("La chouille (" + chouille.getId_Chouille() + ") a bien été supprimé");
