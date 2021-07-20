@@ -6,8 +6,8 @@ spring:
   jpa:
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:8889/java
-    username: root
-    password: 'root'
+    url: jdbc:mysql://localhost:3306/java
+    username: ali
+    password: 'password'
 server:
   port: 8082
