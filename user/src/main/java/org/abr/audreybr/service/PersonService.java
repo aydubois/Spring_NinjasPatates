@@ -35,7 +35,7 @@ public class PersonService {
         return newPerson;
     }
 
-    public Person getPerson(long id) throws NotFoundException {
+    public Person getPerson(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(()->new NotFoundException("Cet utilisateur n'existe pas"));
     }
 
@@ -46,7 +46,7 @@ public class PersonService {
             throw new NotFoundException("Cet utilisateur n'existe pas");
         }
     }
-    public Person editPerson(long id,Person person) throws NotFoundException{
+    public Person editPerson(Integer id,Person person) throws NotFoundException{
         if(person.getName() == null || person.getName().isEmpty()){
             throw new BadRequestException("Input values can't be empty");
         }
@@ -59,7 +59,7 @@ public class PersonService {
     }
 
 
-    public ResponseEntity<String> deletePerson(long id) throws NotFoundException {
+    public ResponseEntity<String> deletePerson(Integer id) throws NotFoundException {
         Person person = this.getPerson(id);
         repository.delete(person);
         return ResponseEntity.status(HttpStatus.OK).body("Le client ("+person.getName()+") a bien été supprimé");

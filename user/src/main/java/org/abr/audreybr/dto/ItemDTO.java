@@ -15,7 +15,7 @@ public class ItemDTO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id_Item;
+    private Integer Id_Item;
 
     @Column
     private String type;
@@ -27,7 +27,7 @@ public class ItemDTO implements Serializable {
     private Integer Measure;
 
     @Column
-    private Integer Unit;
+    private String Unit;
 
     @Column
     private Integer Percentage_Consumed;
@@ -38,7 +38,7 @@ public class ItemDTO implements Serializable {
     @Column
     private Integer Id_Chouille;
 
-    public ItemDTO(Long id_Item, String type, Integer quantity, Integer measure, Integer unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
+    public ItemDTO(Integer id_Item, String type, Integer quantity, Integer measure, String unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
         Id_Item = id_Item;
         this.type = type;
         Quantity = quantity;
@@ -49,11 +49,11 @@ public class ItemDTO implements Serializable {
         Id_Chouille = id_Chouille;
     }
 
-    public Long getId_Item() {
+    public Integer getId_Item() {
         return Id_Item;
     }
 
-    public void setId_Item(Long id_Item) {
+    public void setId_Item(Integer id_Item) {
         Id_Item = id_Item;
     }
 
@@ -81,11 +81,11 @@ public class ItemDTO implements Serializable {
         Measure = measure;
     }
 
-    public Integer getUnit() {
+    public String getUnit() {
         return Unit;
     }
 
-    public void setUnit(Integer unit) {
+    public void setUnit(String unit) {
         Unit = unit;
     }
 

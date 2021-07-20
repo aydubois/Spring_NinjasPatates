@@ -12,7 +12,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id_Item;
+    private Integer Id_Item;
 
     @Column
     private String type;
@@ -24,7 +24,7 @@ public class Item {
     private Integer Measure;
 
     @Column
-    private Integer Unit;
+    private String Unit;
 
     @Column
     private Integer Percentage_Consumed;
@@ -35,8 +35,7 @@ public class Item {
     @Column
     private Integer Id_Chouille;
 
-
-    public Item(Long id_Item, String type, Integer quantity, Integer measure, Integer unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
+    public Item(Integer id_Item, String type, Integer quantity, Integer measure, String unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
         Id_Item = id_Item;
         this.type = type;
         Quantity = quantity;
@@ -47,11 +46,11 @@ public class Item {
         Id_Chouille = id_Chouille;
     }
 
-    public Long getId_Item() {
+    public Integer getId_Item() {
         return Id_Item;
     }
 
-    public void setId_Item(Long id_Item) {
+    public void setId_Item(Integer id_Item) {
         Id_Item = id_Item;
     }
 
@@ -79,11 +78,11 @@ public class Item {
         Measure = measure;
     }
 
-    public Integer getUnit() {
+    public String getUnit() {
         return Unit;
     }
 
-    public void setUnit(Integer unit) {
+    public void setUnit(String unit) {
         Unit = unit;
     }
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 public class LocationDTO implements Serializable {
 
-    private Long Id_Location;
+    private Integer Id_Location;
 
     private String Adress;
 
@@ -21,18 +21,18 @@ public class LocationDTO implements Serializable {
 
     private Integer Id_Person_Host;
 
-    public LocationDTO(Long id_Location, String adress, Integer max_Pers, Integer id_Person_Host) {
+    public LocationDTO(Integer id_Location, String adress, Integer max_Pers, Integer id_Person_Host) {
         Id_Location = id_Location;
         Adress = adress;
         Max_Pers = max_Pers;
         Id_Person_Host = id_Person_Host;
     }
 
-    public Long getId_Location() {
+    public Integer getId_Location() {
         return Id_Location;
     }
 
-    public void setId_Location(Long id_Location) {
+    public void setId_Location(Integer id_Location) {
         Id_Location = id_Location;
     }
 

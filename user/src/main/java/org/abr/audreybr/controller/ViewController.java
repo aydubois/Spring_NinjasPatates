@@ -39,7 +39,7 @@ public class ViewController {
     }
 /*
     @DeleteMapping(path = "{id}")
-    public String delete(@PathVariable("id") long id){
+    public String delete(@PathVariable("id") Integer id){
         service.deleteUser(id);
         return "redirect:/view";
     }
@@ -67,7 +67,7 @@ public class ViewController {
     }
 
     @PutMapping(path = "{id}")
-    public String edit(@PathVariable long id, @ModelAttribute User user) {
+    public String edit(@PathVariable Integer id, @ModelAttribute User user) {
         service.editUser(id,user);
         return "redirect:/view/"+id;
     }

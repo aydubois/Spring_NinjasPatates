@@ -40,11 +40,11 @@ public class LocationService {
         return newLocation;
     }
 
-    public Location getLocation(long id) throws NotFoundException {
+    public Location getLocation(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette location n'existe pas"));
     }
 
-    public Location editLocation(long id, Location location) throws NotFoundException {
+    public Location editLocation(Integer id, Location location) throws NotFoundException {
         if (location.getId_Location() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
@@ -59,7 +59,7 @@ public class LocationService {
     }
 
 
-    public ResponseEntity<String> deleteLocation(long id) throws NotFoundException {
+    public ResponseEntity<String> deleteLocation(Integer id) throws NotFoundException {
         Location location = this.getLocation(id);
         repository.delete(location);
         return ResponseEntity.status(HttpStatus.OK).body("La location (" + location.getId_Location() + ") a bien été supprimé");

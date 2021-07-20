@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 
-    public Optional<Person> findById(Long id);
+    public Optional<Person> findById(Integer id);
     public List<Person> findByName(String name);
 
 
