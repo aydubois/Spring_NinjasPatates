@@ -12,7 +12,29 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class PersonDTO implements Serializable {
-    private Long Id;
 
-    private String Name;
+    private Long Id_Person;
+
+    private String name;
+
+    public PersonDTO(Long id_Person, String name) {
+        Id_Person = id_Person;
+        this.name = name;
+    }
+
+    public Long getId_Person() {
+        return Id_Person;
+    }
+
+    public void setId_Person(Long id_Person) {
+        Id_Person = id_Person;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
