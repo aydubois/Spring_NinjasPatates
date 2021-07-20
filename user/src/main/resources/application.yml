@@ -5,8 +5,11 @@ spring:
         enabled: true
   jpa:
     show-sql: true
+    hibernate:
+      naming:
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
-    url: jdbc:mysql://localhost:3306/java
+    url: jdbc:mysql://localhost:3306/chouillePlanner
     username: root
     password: '{SQL}#42sqlpass'
 server:
