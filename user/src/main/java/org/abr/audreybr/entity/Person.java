@@ -12,22 +12,22 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id_Person;
 
     @Column
     private String name;
 
-    public Person(Long id, String name) {
-        id = id;
-        name = name;
+    public Person(Long id_Person, String name) {
+        Id_Person = id_Person;
+        this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId_Person() {
+        return Id_Person;
     }
 
-    public void setId(Long id) {
-        id = id;
+    public void setId_Person(Long id_Person) {
+        Id_Person = id_Person;
     }
 
     public String getName() {
@@ -35,6 +35,6 @@ public class Person {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 }

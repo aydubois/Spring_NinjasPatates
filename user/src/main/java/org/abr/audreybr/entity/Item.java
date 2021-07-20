@@ -12,63 +12,55 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long Id_Item;
 
     @Column
-    private String Type;
-
-    @Column
-    private Integer Percentage_Consumed;
-
-    @Column
-    private Integer Measure;
+    private String type;
 
     @Column
     private Integer Quantity;
 
     @Column
+    private Integer Measure;
+
+    @Column
     private Integer Unit;
 
-    public Item(Long id, String type, Integer percentage_Consumed, Integer measure, Integer quantity, Integer unit) {
-        Id = id;
-        Type = type;
-        Percentage_Consumed = percentage_Consumed;
-        Measure = measure;
+    @Column
+    private Integer Percentage_Consumed;
+
+    @Column
+    private Integer Id_Person;
+
+    @Column
+    private Integer Id_Chouille;
+
+
+    public Item(Long id_Item, String type, Integer quantity, Integer measure, Integer unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
+        Id_Item = id_Item;
+        this.type = type;
         Quantity = quantity;
+        Measure = measure;
         Unit = unit;
+        Percentage_Consumed = percentage_Consumed;
+        Id_Person = id_Person;
+        Id_Chouille = id_Chouille;
     }
 
-
-    public Long getId() {
-        return Id;
+    public Long getId_Item() {
+        return Id_Item;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public void setId_Item(Long id_Item) {
+        Id_Item = id_Item;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
-    }
-
-    public Integer getPercentage_Consumed() {
-        return Percentage_Consumed;
-    }
-
-    public void setPercentage_Consumed(Integer percentage_Consumed) {
-        Percentage_Consumed = percentage_Consumed;
-    }
-
-    public Integer getMeasure() {
-        return Measure;
-    }
-
-    public void setMeasure(Integer measure) {
-        Measure = measure;
+        this.type = type;
     }
 
     public Integer getQuantity() {
@@ -79,6 +71,14 @@ public class Item {
         Quantity = quantity;
     }
 
+    public Integer getMeasure() {
+        return Measure;
+    }
+
+    public void setMeasure(Integer measure) {
+        Measure = measure;
+    }
+
     public Integer getUnit() {
         return Unit;
     }
@@ -87,4 +87,27 @@ public class Item {
         Unit = unit;
     }
 
+    public Integer getPercentage_Consumed() {
+        return Percentage_Consumed;
+    }
+
+    public void setPercentage_Consumed(Integer percentage_Consumed) {
+        Percentage_Consumed = percentage_Consumed;
+    }
+
+    public Integer getId_Person() {
+        return Id_Person;
+    }
+
+    public void setId_Person(Integer id_Person) {
+        Id_Person = id_Person;
+    }
+
+    public Integer getId_Chouille() {
+        return Id_Chouille;
+    }
+
+    public void setId_Chouille(Integer id_Chouille) {
+        Id_Chouille = id_Chouille;
+    }
 }

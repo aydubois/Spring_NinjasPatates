@@ -12,26 +12,38 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long Id_Location;
+
+    @Column
+    private String Adress;
 
     @Column
     private Integer Max_Pers;
 
     @Column
-    private String Adress;
+    private Integer Id_Person_Host;
 
-    public Location(Long id, Integer max_Pers, String adress) {
-        Id = id;
-        Max_Pers = max_Pers;
+    public Location(Long id_Location, String adress, Integer max_Pers, Integer id_Person_Host) {
+        Id_Location = id_Location;
         Adress = adress;
+        Max_Pers = max_Pers;
+        Id_Person_Host = id_Person_Host;
     }
 
-    public Long getId() {
-        return Id;
+    public Long getId_Location() {
+        return Id_Location;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public void setId_Location(Long id_Location) {
+        Id_Location = id_Location;
+    }
+
+    public String getAdress() {
+        return Adress;
+    }
+
+    public void setAdress(String adress) {
+        Adress = adress;
     }
 
     public Integer getMax_Pers() {
@@ -42,11 +54,11 @@ public class Location {
         Max_Pers = max_Pers;
     }
 
-    public String getAdress() {
-        return Adress;
+    public Integer getId_Person_Host() {
+        return Id_Person_Host;
     }
 
-    public void setAdress(String adress) {
-        Adress = adress;
+    public void setId_Person_Host(Integer id_Person_Host) {
+        Id_Person_Host = id_Person_Host;
     }
 }
