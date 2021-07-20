@@ -1,13 +1,11 @@
 package org.abr.audreybr.controller;
 
 import javassist.NotFoundException;
-import org.abr.audreybr.dto.PersonDTO;
 import org.abr.audreybr.entity.Person;
 import org.abr.audreybr.service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 
 @RestController
