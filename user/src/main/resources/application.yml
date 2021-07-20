@@ -5,6 +5,9 @@ spring:
         enabled: true
   jpa:
     show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     url: jdbc:mysql://localhost:3306/java
     username: ali

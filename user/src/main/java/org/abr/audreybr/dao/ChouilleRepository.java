@@ -17,6 +17,10 @@ public interface ChouilleRepository extends JpaRepository<Chouille, Integer> {
 
     @Query(value = "select * from Chouille C inner join Location L on C.Id_Location = L.Id_Location inner join Person P on L.Id_Person_Host = P.Id_Person where P.Id_Person = :idUser",
             nativeQuery = true)
-    List<Chouille> getChouilleListById_Person_Host(@Param("idUser") Integer id);
+    List<Chouille> getChouilleListByIdPersonHost(@Param("idUser") Integer id);
+
+    @Query(value = "select * from Chouille C inner join Persons_Chouilles PC on C.Id_Chouille = PC.Id_Chouille where PC.Id_Person = :idUser",
+            nativeQuery = true)
+    List<Chouille> getChouilleListByIdPerson(@Param("idUser") Integer id);
 
 }

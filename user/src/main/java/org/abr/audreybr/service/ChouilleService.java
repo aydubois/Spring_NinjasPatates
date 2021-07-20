@@ -48,11 +48,13 @@ public class ChouilleService {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette chouille n'existe pas"));
     }
 
-    public List<Chouille> getMyChouille(Integer id) throws NotFoundException {
-        return repository.getChouilleListById_Person_Host(id);
+    public List<Chouille> getMyChouilles(Integer id) throws NotFoundException {
+        return repository.getChouilleListByIdPersonHost(id);
     }
 
-
+    public List<Chouille> getChouillesWhereIamInvited(Integer id) throws NotFoundException {
+        return repository.getChouilleListByIdPerson(id);
+    }
 
     public Chouille editChouille(Integer id, Chouille chouille) throws NotFoundException {
         if (chouille.getId_Chouille() == null) {

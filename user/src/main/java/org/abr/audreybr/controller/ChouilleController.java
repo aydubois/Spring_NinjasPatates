@@ -1,7 +1,6 @@
 package org.abr.audreybr.controller;
 
 import javassist.NotFoundException;
-import org.abr.audreybr.dto.ChouilleDTO;
 import org.abr.audreybr.entity.Chouille;
 import org.abr.audreybr.service.ChouilleService;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +27,6 @@ public class ChouilleController {
     @GetMapping("/{id}")
     public Chouille get(@PathVariable("id") Integer id) throws NotFoundException {
         return chouilleService.getChouille(id);
-    }
-
-    @GetMapping("/myChouille/{id}")
-    public List<Chouille> getChouilleListById_Person_Host(@PathVariable("id") Integer id) throws NotFoundException {
-        return chouilleService.getMyChouille(id);
     }
 
     @PostMapping

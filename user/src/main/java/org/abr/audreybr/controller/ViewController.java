@@ -1,6 +1,9 @@
 package org.abr.audreybr.controller;
 
+import javassist.NotFoundException;
+import org.abr.audreybr.entity.Chouille;
 import org.abr.audreybr.entity.Person;
+import org.abr.audreybr.service.ChouilleService;
 import org.abr.audreybr.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,27 +17,27 @@ import java.util.List;
 public class ViewController {
 
     @Autowired
-    private PersonService service;
+    private ChouilleService service;
 
     @GetMapping(path = "/profil")
     public String index(){
       /*  List<Person> users = service.getAll();
         model.addAttribute("users",users);
         model.addAttribute("newUser",new Person());*/
+
         return "profil";
     }
-    @GetMapping(path = "/chouilles/mine")
-    public String index2(){
-      /*  List<Person> users = service.getAll();
-        model.addAttribute("users",users);
-        model.addAttribute("newUser",new Person());*/
+    @GetMapping(path = "/myChouilles/{id}")
+    public String getMyChouilles(@PathVariable("id") int id, Model model) throws NotFoundException {
+        List<Chouille> chouilles = service.getMyChouilles(id);
+        model.addAttribute("chouilles",chouilles);
         return "chouilles_mine";
     }
-    @GetMapping(path = "/chouilles/other")
-    public String index3(){
-      /*  List<Person> users = service.getAll();
-        model.addAttribute("users",users);
-        model.addAttribute("newUser",new Person());*/
+
+    @GetMapping(path = "/otherChouilles/{id}")
+    public String getChouillesWhereIamInvited(@PathVariable("id") int id, Model model) throws NotFoundException {
+        List<Chouille> chouilles = service.getChouillesWhereIamInvited(id);
+        model.addAttribute("chouilles",chouilles);
         return "chouilles_other";
     }
 /*
