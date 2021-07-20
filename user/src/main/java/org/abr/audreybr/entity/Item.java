@@ -24,19 +24,19 @@ public class Item {
     private Integer Measure;
 
     @Column
-    private Integer Unit;
+    private String Unit;
 
     @Column
     private Integer Percentage_Consumed;
 
     @Column
-    private Integer Id_Person;
+    private Long Id_Person;
 
     @Column
-    private Integer Id_Chouille;
+    private Long Id_Chouille;
 
 
-    public Item(Long id_Item, String type, Integer quantity, Integer measure, Integer unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
+    public Item(Long id_Item, String type, Integer quantity, Integer measure, String unit, Integer percentage_Consumed, Long id_Person, Long id_Chouille) {
         Id_Item = id_Item;
         this.type = type;
         Quantity = quantity;
@@ -79,11 +79,11 @@ public class Item {
         Measure = measure;
     }
 
-    public Integer getUnit() {
+    public String getUnit() {
         return Unit;
     }
 
-    public void setUnit(Integer unit) {
+    public void setUnit(String unit) {
         Unit = unit;
     }
 
@@ -95,19 +95,19 @@ public class Item {
         Percentage_Consumed = percentage_Consumed;
     }
 
-    public Integer getId_Person() {
+    public Long getId_Person() {
         return Id_Person;
     }
 
-    public void setId_Person(Integer id_Person) {
+    public void setId_Person(Long id_Person) {
         Id_Person = id_Person;
     }
 
-    public Integer getId_Chouille() {
+    public Long getId_Chouille() {
         return Id_Chouille;
     }
 
-    public void setId_Chouille(Integer id_Chouille) {
+    public void setId_Chouille(Long id_Chouille) {
         Id_Chouille = id_Chouille;
     }
 }
