@@ -7,3 +7,12 @@ server:
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id : chouilleplanner
+          uri: lb://chouilleplanner
+          predicates:
+            - Path=/profil/**
+          # filters:
+          #   - RewritePath=/realroute/(?<segment>.*), http://127.0.0.1:8082/chouille

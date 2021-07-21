@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: chouilleplanner
   mvc:
     hiddenmethod:
       filter:
@@ -14,3 +16,7 @@ spring:
     password: '{SQL}#42sqlpass'
 server:
   port: 8082
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka
