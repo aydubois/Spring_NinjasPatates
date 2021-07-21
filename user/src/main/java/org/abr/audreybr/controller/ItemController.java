@@ -26,7 +26,7 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public Item get(@PathVariable("id") long id) throws NotFoundException {
+    public Item get(@PathVariable("id") Integer id) throws NotFoundException {
         return itemService.getItem(id);
     }
 
@@ -36,12 +36,12 @@ public class ItemController {
     }
 
     @PutMapping(path = "{id}")
-    public Item update(@PathVariable long id, @RequestBody Item item) throws NotFoundException {
+    public Item update(@PathVariable Integer id, @RequestBody Item item) throws NotFoundException {
         return itemService.editItem(id,item);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) throws NotFoundException {
         return itemService.deleteItem(id);
     }
 

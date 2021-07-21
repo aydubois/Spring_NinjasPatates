@@ -1,7 +1,6 @@
 package org.abr.audreybr.controller;
 
 import javassist.NotFoundException;
-import org.abr.audreybr.dto.ChouilleDTO;
 import org.abr.audreybr.entity.Chouille;
 import org.abr.audreybr.service.ChouilleService;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class ChouilleController {
     }
 
     @GetMapping("/{id}")
-    public Chouille get(@PathVariable("id") long id) throws NotFoundException {
+    public Chouille get(@PathVariable("id") Integer id) throws NotFoundException {
         return chouilleService.getChouille(id);
     }
 
@@ -36,12 +35,12 @@ public class ChouilleController {
     }
 
     @PutMapping(path = "{id}")
-    public Chouille update(@PathVariable long id, @RequestBody Chouille chouille) throws NotFoundException {
+    public Chouille update(@PathVariable Integer id, @RequestBody Chouille chouille) throws NotFoundException {
         return chouilleService.editChouille(id,chouille);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) throws NotFoundException {
         return chouilleService.deleteChouille(id);
     }
 

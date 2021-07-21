@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="profil"></title>
     <th:block th:insert="~{fragments/header :: link}"></th:block>
+    <link th:href="@{/styles/profil.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -22,7 +23,7 @@
                 <input type="submit" value="modifier" />
             </form>
         </section>
-        <section>
+        <section class="party-management">
             <h2>Gestion des lieux de Chouilles</h2>
             <th:block th:each="location,state : ${locations}">
                 <form action="#"
@@ -35,25 +36,30 @@
                                <!--th:field="*{Adress}"/>-->
                     </div>
                     <div>
-                        <label for="nbmax_${state.index}">Nombre de personnes maximal</label>
+                        <label for="nbmax_${state.index}">Nombre de personnes maximal :</label>
                         <input id="nbmax_${state.index}" type="number" placeholder="6" />
                               <!-- th:field="*{Max_Pers}"/>-->
+                        <div>
+                            <input type="submit" value="modifier" />
+                            <button class="delete-location"> Supprimer</button> <!--TODO: faire ajax ?? -->
+                        </div>
                     </div>
-                    <button> Supprimer</button>
                 </form>
             </th:block>
 
 
         </section>
-        <section>
+        <section class="history">
             <h2>Historique récent</h2>
-            <article th:each="chouille : ${chouilles}">
-                <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
-                <p>Date : <span th:text="${chouille.Date}"></span></p>
-                <!--TODO: voir comment récupérer locaion adress à partir de chouille-->
-               <!-- <p>Lieu : ${chouille.Location.Adress}</p>-->
+            <div>
+                <article th:each="chouille : ${chouilles}">
+                    <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
+                    <p>Date : <span th:text="${chouille.Date}"></span></p>
+                    <!--TODO: voir comment récupérer locaion adress à partir de chouille-->
+                   <!-- <p>Lieu : ${chouille.Location.Adress}</p>-->
 
-            </article>
+                </article>
+            </div>
         </section>
     </main>
 </body>
