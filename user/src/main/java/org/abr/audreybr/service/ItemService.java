@@ -27,7 +27,7 @@ public class ItemService {
         return repository.findAll();
     }
 
-    public Item getItem(long id) throws NotFoundException {
+    public Item getItem(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette item n'existe pas"));
     }
 
@@ -56,7 +56,7 @@ public class ItemService {
         return newItem;
     }
 
-    public Item editItem(long id, Item item) throws NotFoundException {
+    public Item editItem(Integer id, Item item) throws NotFoundException {
         if (item.getId_Item() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
@@ -75,7 +75,7 @@ public class ItemService {
     }
 
 
-    public ResponseEntity<String> deleteItem(long id) throws NotFoundException {
+    public ResponseEntity<String> deleteItem(Integer id) throws NotFoundException {
         Item item = this.getItem(id);
         repository.delete(item);
         return ResponseEntity.status(HttpStatus.OK).body("La item (" + item.getId_Item() + ") a bien été supprimé");
