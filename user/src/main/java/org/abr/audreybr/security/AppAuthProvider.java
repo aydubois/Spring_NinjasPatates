@@ -5,11 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class AppAuthProvider extends DaoAuthenticationProvider {
 
@@ -36,4 +34,9 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
 
     }
 
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return true;
+
+    }
 }

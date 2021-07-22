@@ -8,23 +8,23 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-@Table(name = "User")
-public class User implements Serializable, UserDetails {
+@Table(name = "USER")
+public class User implements Serializable , UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer user_id;
 
     private String username;
 
     private String password;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getuser_id() {
+        return user_id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setuser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
