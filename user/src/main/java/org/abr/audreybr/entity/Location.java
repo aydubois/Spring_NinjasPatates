@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@Embeddable
 public class Location {
 
     @Id

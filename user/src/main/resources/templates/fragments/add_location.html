@@ -2,15 +2,15 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ajouter une chouille</title>
+    <title>ajouter un lieu</title>
 </head>
 <body>
-<div th:fragment="addchouille(id_person)">
+<div th:fragment="add_location(id_person)">
     <h2>Ajout Lieu de Chouille</h2>
     <form action="#"
-        th:action="@{/chouille/create/{id}(id=${person.Id_Person})}"
+        th:action="@{/location/create/{id}(id=${person.Id_Person})}"
         th:method="post"
-        th:object="${chouille}" >
+        th:object="${location}" >
         <div>
             <label for="address">Adresse :</label>
             <input id="address" type="text" placeholder="7, rue de la soif"

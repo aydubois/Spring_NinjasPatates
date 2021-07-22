@@ -25,7 +25,7 @@ public class ChouilleService {
     public Chouille create(Chouille chouille) {
         if (chouille.getThematic() == null || chouille.getThematic().isEmpty() ||
                 chouille.getDate() == null ||
-                chouille.getId_Location() == null ||
+                chouille.getLocation() == null ||
                 chouille.getId_Person_Sam() == null ||
                 chouille.getId_Person_Bouncer() == null) {
             throw new BadRequestException("Input values can't be empty");
@@ -35,7 +35,7 @@ public class ChouilleService {
 
         newChouille.setThematic(chouille.getThematic());
         newChouille.setDate(chouille.getDate());
-        newChouille.setId_Location(chouille.getId_Location());
+        newChouille.setLocation(chouille.getLocation());
         newChouille.setId_Person_Sam(chouille.getId_Person_Sam());
         newChouille.setId_Person_Bouncer(chouille.getId_Person_Bouncer());
         newChouille.setCode(chouille.getCode());
@@ -64,7 +64,7 @@ public class ChouilleService {
 
         modifiedChouille.setThematic(chouille.getThematic());
         modifiedChouille.setDate(chouille.getDate());
-        modifiedChouille.setId_Location(chouille.getId_Location());
+        modifiedChouille.setLocation(chouille.getLocation());
         modifiedChouille.setId_Person_Sam(chouille.getId_Person_Sam());
         modifiedChouille.setId_Person_Bouncer(chouille.getId_Person_Bouncer());
         modifiedChouille.setCode(chouille.getCode());

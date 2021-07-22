@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div th:replace="~{fragments/header :: header1}"></div>
+    <div th:replace="~{fragments/header :: header1(${person.Id_Person})}"></div>
     <main>
         <section>
             <form
@@ -20,18 +20,18 @@
                 <label for="name">Modifier mon nom :</label>
                 <input id="name" type="text" placeholder="Nom"
                        th:field="*{name}" />
-                <input type="submit" value="modifier" />
+                <input type="submit" value="Modifier" />
             </form>
         </section>
         <section class="party-management">
             <h2>Gestion des lieux de Chouilles</h2>
-            <th:block th:each="location,state : ${locations}">
+            <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
                 <form action="#"
-                     th:action="@{/location/put/{id}(id=${location.Id_Location})}"
+                     th:action="@{/location/put/{id}(id=${location?.Id_Location})}"
                      th:method="put"
                      th:object="${location}" >
                     <div>
-                        <label >Adresse :</label>
+                        <label for="address">Adresse :</label>
                         <input id="address" type="text" placeholder="7, rue de la soif 37000 Tours" />
                                <!--th:field="*{Adress}"/>-->
                     </div>
@@ -41,18 +41,21 @@
                               <!-- th:field="*{Max_Pers}"/>-->
                         <div>
                             <input type="submit" value="modifier" />
-                            <button class="delete-location"> Supprimer</button> <!--TODO: faire ajax ?? -->
+                            <button class="delete-location">Supprimer</button> <!--TODO: faire ajax ?? -->
                         </div>
                     </div>
                 </form>
             </th:block>
-
+            <th:block th:if="${locations.isEmpty()}" >
+                <p>Aucun lieu de renseigné pour le moment</p>
+            </th:block>
+            <button>Ajouter un nouveau lieu</button>
 
         </section>
         <section class="history">
             <h2>Historique récent</h2>
             <div>
-                <article th:each="chouille : ${chouilles}">
+                <article th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
                     <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
                     <p>Date : <span th:text="${chouille.Date}"></span></p>
                     <!--TODO: voir comment récupérer locaion adress à partir de chouille-->

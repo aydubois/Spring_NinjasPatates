@@ -21,8 +21,9 @@ public class Chouille {
     @Column
     private Date Date;
 
-    @Column
-    private Integer Id_Location;
+    @ManyToOne
+    @JoinColumn (name="Id_Location")
+    private Location Location;
 
     @Column
     private Integer Id_Person_Sam;
@@ -33,11 +34,11 @@ public class Chouille {
     @Column
     private String code;
 
-    public Chouille(Integer id_Chouille, String thematic, java.sql.Date date, Integer id_Location, Integer id_Person_Sam, Integer id_Person_Bouncer, String code) {
+    public Chouille(Integer id_Chouille, String thematic, java.sql.Date date, Location location, Integer id_Person_Sam, Integer id_Person_Bouncer, String code) {
         Id_Chouille = id_Chouille;
         Thematic = thematic;
         Date = date;
-        Id_Location = id_Location;
+        Location = location;
         Id_Person_Sam = id_Person_Sam;
         Id_Person_Bouncer = id_Person_Bouncer;
         this.code = code;
@@ -67,12 +68,12 @@ public class Chouille {
         Date = date;
     }
 
-    public Integer getId_Location() {
-        return Id_Location;
+    public Location getLocation() {
+        return Location;
     }
 
-    public void setId_Location(Integer id_Location) {
-        Id_Location = id_Location;
+    public void setLocation(Location location) {
+        Location = location;
     }
 
     public Integer getId_Person_Sam() {

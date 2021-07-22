@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,6 +23,8 @@ public class LocationService {
     public List<Location> getAll() {
         return repository.findAll();
     }
+
+    public List<Location> getByHost(Integer id){ return repository.findById_Person_Host(id);}
 
     public Location create(Location location) {
         if (location.getAdress() == null ||

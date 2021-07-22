@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>modifier une chouille</title>
 </head>
 <body>
-$END$
+<div th:fragment="update_chouille(chouille)">
+    <h2>Modification</h2>
+    <p class="warning">* La modification enverra une notification à tous les invités.</p>
+    <form action="#"
+          th:action="@{/chouille/update/{id}(id=${chouille.Id_Chouille})}"
+          th:method="put"
+          th:object="${chouille}" >
+        <div>
+            <label for="thematic">Thème : </label>
+            <input id="thematic" type="text" placeholder="Anniversaire" th:field="*{Thematic}" />
+        </div>
+        <div>
+            <label for="date">Date : </label>
+            <input id="date" type="date"  th:field="*{Date}" />
+        </div>
+        <div>
+            <label for="address">Lieu : </label>
+            <input id="address" list="list_address"  th:field="*{Adress}" />
+            <datalist id="list_address">
+                <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
+                    <option th:value="location.Id_Location" th:text="location.Adress"></option>
+                </th:block>
+            </datalist>
+        </div>
+        <input type="submit" value="Modifier" />
+    </form>
+</div>
 </body>
 </html>
