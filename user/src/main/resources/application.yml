@@ -10,7 +10,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
     url: jdbc:mysql://localhost:3306/java
-    username: ali
-    password: 'password'
+    username: root
+    password: 'root'
 server:
   port: 8082

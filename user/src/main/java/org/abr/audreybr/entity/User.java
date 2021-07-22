@@ -19,7 +19,6 @@ public class User implements Serializable, UserDetails {
 
     private String password;
 
-
     public Integer getUserId() {
         return userId;
     }
