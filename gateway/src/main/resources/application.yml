@@ -16,3 +16,7 @@ spring:
             - Path=/profil/**
           # filters:
           #   - RewritePath=/profil/(?<segment>.*), http://127.0.0.1:8082/profil/$\{segment}
+        # - id : security
+        #   uri: lb://auth
+        #   predicates:
+        #     - Path=/login/**
