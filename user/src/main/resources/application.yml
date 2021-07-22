@@ -9,7 +9,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
-    url: jdbc:mysql://localhost:3306/java
+    url: jdbc:mysql://localhost:8889/java
     username: root
     password: 'root'
 server:
