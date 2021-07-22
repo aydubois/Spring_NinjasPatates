@@ -25,7 +25,7 @@
         <h2>Rejoindre une Chouille</h2>
         <form action="#"
               th:action="@{/chouille/addperson/{id}/(id=${person?.Id_Person})}"
-              th:method="put"
+              th:method="post"
               th:object="${chouille}">
             <div>
                 <label for="idsecret">Id Secret : </label>

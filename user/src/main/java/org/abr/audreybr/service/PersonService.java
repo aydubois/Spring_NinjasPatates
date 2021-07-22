@@ -23,13 +23,13 @@ public class PersonService {
         return repository.findAll();
     }
     public Person create(Person person) {
-        if (person.getName() == null ) {
+        if (person.getUsername() == null ) {
             throw new BadRequestException("Input values can't be empty");
         }
 
         Person newPerson = new Person();
 
-        newPerson.setName(person.getName());
+        newPerson.setUsername(person.getUsername());
 
         repository.save(newPerson);
         return newPerson;
@@ -41,18 +41,18 @@ public class PersonService {
 
     public Person login(String name) throws NotFoundException {
         try {
-            return repository.findByName(name).get(0);
+            return repository.findByUsername(name).get(0);
         }catch (Exception e){
             throw new NotFoundException("Cet utilisateur n'existe pas");
         }
     }
     public Person editPerson(Integer id,Person person) throws NotFoundException{
-        if(person.getName() == null || person.getName().isEmpty()){
+        if(person.getUsername() == null || person.getUsername().isEmpty()){
             throw new BadRequestException("Input values can't be empty");
         }
         Person modifiedPerson = repository.findById(id).orElseThrow(()->new NotFoundException("ce client n'existe pas"));
 
-        modifiedPerson.setName(person.getName());
+        modifiedPerson.setUsername(person.getUsername());
 
         repository.save(modifiedPerson);
         return modifiedPerson;
@@ -62,7 +62,7 @@ public class PersonService {
     public ResponseEntity<String> deletePerson(Integer id) throws NotFoundException {
         Person person = this.getPerson(id);
         repository.delete(person);
-        return ResponseEntity.status(HttpStatus.OK).body("Le client ("+person.getName()+") a bien été supprimé");
+        return ResponseEntity.status(HttpStatus.OK).body("Le client ("+person.getUsername()+") a bien été supprimé");
     }
 
 

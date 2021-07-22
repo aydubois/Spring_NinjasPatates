@@ -13,83 +13,85 @@ public class Chouille {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id_Chouille;
+    private Integer id_Chouille;
 
     @Column
-    private String Thematic;
+    private String thematic;
 
     @Column
-    private Date Date;
+    private Date date;
 
     @ManyToOne
     @JoinColumn (name="Id_Location")
-    private Location Location;
+    private Location location;
 
-    @Column
-    private Integer Id_Person_Sam;
+    @ManyToOne
+    @JoinColumn (name="Id_Person_Sam")
+    private Person sam;
 
-    @Column
-    private Integer Id_Person_Bouncer;
+    @ManyToOne
+    @JoinColumn (name="Id_Person_Bouncer")
+    private Person bouncer;
 
     @Column
     private String code;
 
-    public Chouille(Integer id_Chouille, String thematic, java.sql.Date date, Location location, Integer id_Person_Sam, Integer id_Person_Bouncer, String code) {
-        Id_Chouille = id_Chouille;
-        Thematic = thematic;
-        Date = date;
-        Location = location;
-        Id_Person_Sam = id_Person_Sam;
-        Id_Person_Bouncer = id_Person_Bouncer;
+    public Chouille(Integer id_Chouille, String thematic, java.sql.Date date, Location location, Person sam, Person bouncer, String code) {
+        this.id_Chouille = id_Chouille;
+        this.thematic = thematic;
+        this.date = date;
+        this.location = location;
+        this.sam = sam;
+        this.bouncer = bouncer;
         this.code = code;
     }
 
     public Integer getId_Chouille() {
-        return Id_Chouille;
+        return id_Chouille;
     }
 
     public void setId_Chouille(Integer id_Chouille) {
-        Id_Chouille = id_Chouille;
+        this.id_Chouille = id_Chouille;
     }
 
     public String getThematic() {
-        return Thematic;
+        return thematic;
     }
 
     public void setThematic(String thematic) {
-        Thematic = thematic;
+        this.thematic = thematic;
     }
 
     public java.sql.Date getDate() {
-        return Date;
+        return this.date;
     }
 
     public void setDate(java.sql.Date date) {
-        Date = date;
+        this.date = date;
     }
 
     public Location getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(Location location) {
-        Location = location;
+        this.location = location;
     }
 
-    public Integer getId_Person_Sam() {
-        return Id_Person_Sam;
+    public Person getSam() {
+        return sam;
     }
 
-    public void setId_Person_Sam(Integer id_Person_Sam) {
-        Id_Person_Sam = id_Person_Sam;
+    public void setSam(Person sam) {
+        this.sam = sam;
     }
 
-    public Integer getId_Person_Bouncer() {
-        return Id_Person_Bouncer;
+    public Person getBouncer() {
+        return bouncer;
     }
 
-    public void setId_Person_Bouncer(Integer id_Person_Bouncer) {
-        Id_Person_Bouncer = id_Person_Bouncer;
+    public void setBouncer(Person bouncer) {
+        this.bouncer = bouncer;
     }
 
     public String getCode() {

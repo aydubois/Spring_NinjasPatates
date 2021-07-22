@@ -8,37 +8,44 @@
 </head>
 <body>
 
-    <div th:replace="~{fragments/header :: header1(${person.Id_Person})}"></div>
+    <div th:replace="~{fragments/header :: header1(${person.id_Person})}"></div>
     <main>
         <section>
             <form
                  action="#"
-                  th:action="@{/person/put/{id}(id=${person.Id_Person})}"
-                  th:method="put"
+                  th:action="@{/person/put/{id}(id=${person.id_Person})}"
+                  th:method="post"
                   th:object="${person}" >
 
                 <label for="name">Modifier mon nom :</label>
                 <input id="name" type="text" placeholder="Nom"
-                       th:field="*{name}" />
+                       th:field="*{username}" />
+                <input type="hidden" th:field="*{id_Person}">
                 <input type="submit" value="Modifier" />
             </form>
         </section>
+
+<!--        <tr th:each="var :${#vars.getVariableNames()}">
+            <td th:text="${var}"></td>
+            <td th:text="${#vars.getVariable(var)}"></td>
+        </tr>-->
+
         <section class="party-management">
             <h2>Gestion des lieux de Chouilles</h2>
-            <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
+            <th:block th:if="${!locations.isEmpty()}" th:each="loc : ${locations}">
                 <form action="#"
-                     th:action="@{/location/put/{id}(id=${location?.Id_Location})}"
-                     th:method="put"
-                     th:object="${location}" >
+                     th:action="@{/location/put/{id}(id=${loc.id_Location})}"
+                     th:method="post">
+                    <input type="hidden" th:value="${loc.id_Location}" th:name="id_Location">
                     <div>
                         <label for="address">Adresse :</label>
-                        <input id="address" type="text" placeholder="7, rue de la soif 37000 Tours" />
-                               <!--th:field="*{Adress}"/>-->
+                        <input id="address" type="text" placeholder="7, rue de la soif 37000 Tours"
+                               th:name="adress" th:value="${loc.adress}"/>
                     </div>
                     <div>
-                        <label for="nbmax_${state.index}">Nombre de personnes maximal :</label>
-                        <input id="nbmax_${state.index}" type="number" placeholder="6" />
-                              <!-- th:field="*{Max_Pers}"/>-->
+                        <label >Nombre de personnes maximal :</label>
+                        <input  type="number" placeholder="6"
+                                th:name="max_Pers" th:value="${loc.max_Pers}"/>
                         <div>
                             <input type="submit" value="modifier" />
                             <button class="delete-location">Supprimer</button> <!--TODO: faire ajax ?? -->
@@ -56,8 +63,8 @@
             <h2>Historique récent</h2>
             <div>
                 <article th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
-                    <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
-                    <p>Date : <span th:text="${chouille.Date}"></span></p>
+                    <p>Thème : <span th:text="${chouille.thematic}"></span></p>
+                    <p>Date : <span th:text="${chouille.date}"></span></p>
                     <!--TODO: voir comment récupérer locaion adress à partir de chouille-->
                    <!-- <p>Lieu : ${chouille.Location.Adress}</p>-->
 

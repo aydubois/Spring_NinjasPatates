@@ -10,7 +10,7 @@
     <p class="warning">* La modification enverra une notification à tous les invités.</p>
     <form action="#"
           th:action="@{/chouille/update/{id}(id=${chouille.Id_Chouille})}"
-          th:method="put"
+          th:method="post"
           th:object="${chouille}" >
         <div>
             <label for="thematic">Thème : </label>

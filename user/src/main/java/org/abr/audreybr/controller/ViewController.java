@@ -35,11 +35,13 @@ public class ViewController {
         Person person = servicePerson.getPerson(id);
         model.addAttribute("person",person);
         List<Location> locations = serviceLocation.getByHost(id); //transform Optional => List
-
+        /*model.addAttribute("test", locations.get(0));*/
         model.addAttribute("locations", locations);
         /*TODO : 3 dernières chouilles passées */
-        List<Chouille> chouilles = serviceChouille.getAll();
+
+        List<Chouille> chouilles = serviceChouille.getChouilleListByIdPersonOrderedByDate(id);
         model.addAttribute("chouilles", chouilles);
+
         return "profil";
     }
     @PutMapping(path ="/location/put/{id}")
@@ -54,14 +56,8 @@ public class ViewController {
         model.addAttribute("person",person);
 
         //add chouille with location into model
-        List<Chouille> chouilles = serviceChouille.getMyChouilles(id);
-        /*List<ChouilleDTO> chouillesDTO = new ArrayList<>();
-        if(!chouilles.isEmpty()){
-            chouilles.forEach(chouille -> {
-                ChouilleDTO chouilleDTO = new ChouilleDTO(chouille.getId_Chouille(), chouille.getThematic(), chouille.getDate(), chouille.getId_Location(), chouille.getId_Person_Sam(), chouille.getId_Person_Bouncer(), chouille.getCode());
-                chouillesDTO.add(chouilleDTO);
-            });
-        }*/
+        List<Chouille> chouilles = serviceChouille.getMyChouillesInProgress(id);
+
         model.addAttribute("chouilles",chouilles);
 
         //add new chouille into model
@@ -77,9 +73,9 @@ public class ViewController {
     public String getChouillesWhereIamInvited(@PathVariable("id") int id, Model model) throws NotFoundException {
         Person person = servicePerson.getPerson(id);
         model.addAttribute("person",person);
-        List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
+        /*List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
         model.addAttribute("chouilles",chouilles);
-        return "chouilles_other";
+        */return "chouilles_other";
     }
 
 

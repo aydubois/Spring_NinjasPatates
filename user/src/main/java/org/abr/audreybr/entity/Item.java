@@ -12,46 +12,48 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id_Item;
+    private Integer id_Item;
 
     @Column
     private String type;
 
     @Column
-    private Integer Quantity;
+    private Integer quantity;
 
     @Column
-    private Integer Measure;
+    private Integer measure;
 
     @Column
-    private String Unit;
+    private String unit;
 
     @Column
-    private Integer Percentage_Consumed;
+    private Integer percentage_Consumed;
 
-    @Column
-    private Integer Id_Person;
+    @ManyToOne
+    @JoinColumn (name="Id_Person")
+    private Person person;
 
-    @Column
-    private Integer Id_Chouille;
+    @ManyToOne
+    @JoinColumn (name="Id_Chouille")
+    private Chouille chouille;
 
-    public Item(Integer id_Item, String type, Integer quantity, Integer measure, String unit, Integer percentage_Consumed, Integer id_Person, Integer id_Chouille) {
-        Id_Item = id_Item;
+    public Item(Integer id_Item, String type, Integer quantity, Integer measure, String unit, Integer percentage_Consumed, Person person, Chouille chouille) {
+        this.id_Item = id_Item;
         this.type = type;
-        Quantity = quantity;
-        Measure = measure;
-        Unit = unit;
-        Percentage_Consumed = percentage_Consumed;
-        Id_Person = id_Person;
-        Id_Chouille = id_Chouille;
+        this.quantity = quantity;
+        this.measure = measure;
+        this.unit = unit;
+        this.percentage_Consumed = percentage_Consumed;
+        this.person = person;
+        this.chouille = chouille;
     }
 
     public Integer getId_Item() {
-        return Id_Item;
+        return id_Item;
     }
 
     public void setId_Item(Integer id_Item) {
-        Id_Item = id_Item;
+        this.id_Item = id_Item;
     }
 
     public String getType() {
@@ -63,50 +65,50 @@ public class Item {
     }
 
     public Integer getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(Integer quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public Integer getMeasure() {
-        return Measure;
+        return measure;
     }
 
     public void setMeasure(Integer measure) {
-        Measure = measure;
+        this.measure = measure;
     }
 
     public String getUnit() {
-        return Unit;
+        return unit;
     }
 
     public void setUnit(String unit) {
-        Unit = unit;
+        this.unit = unit;
     }
 
     public Integer getPercentage_Consumed() {
-        return Percentage_Consumed;
+        return percentage_Consumed;
     }
 
     public void setPercentage_Consumed(Integer percentage_Consumed) {
-        Percentage_Consumed = percentage_Consumed;
+        this.percentage_Consumed = percentage_Consumed;
     }
 
-    public Integer getId_Person() {
-        return Id_Person;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setId_Person(Integer id_Person) {
-        Id_Person = id_Person;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public Integer getId_Chouille() {
-        return Id_Chouille;
+    public Chouille getChouille() {
+        return chouille;
     }
 
-    public void setId_Chouille(Integer id_Chouille) {
-        Id_Chouille = id_Chouille;
+    public void setChouille(Chouille chouille) {
+        this.chouille = chouille;
     }
 }

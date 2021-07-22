@@ -13,7 +13,7 @@
         </div>
         <nav>
             <ul>
-                <li><img th:src="@{/pictures/profil.svg}"><a th:href="@{/profil/${id_person}}">Mon Profil</a></li>
+                <li><img th:src="@{/pictures/profil.svg}"><a th:href="@{/profil/{id}(id=${id_person})}">Mon Profil</a></li>
                 <li class="drop-down-menu"> <img th:src="@{/pictures/party.svg}">Chouilles
                     <ul>
                         <li><a th:href="@{/myChouilles/{id}(id=${id_person})}">Mes miennes</a></li>

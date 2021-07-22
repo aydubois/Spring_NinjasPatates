@@ -37,7 +37,7 @@ public class ItemService {
                 item.getMeasure() == null ||
                 item.getUnit() == null ||
                 item.getPercentage_Consumed() == null ||
-                item.getId_Person() == null ||
+                item.getPerson() == null ||
                 item.getId_Item() == null) {
             throw new BadRequestException("Input values can't be empty");
         }
@@ -49,7 +49,7 @@ public class ItemService {
         newItem.setMeasure(item.getMeasure());
         newItem.setUnit(item.getUnit());
         newItem.setPercentage_Consumed(item.getPercentage_Consumed());
-        newItem.setId_Person(item.getId_Person());
+        newItem.setPerson(item.getPerson());
         newItem.setId_Item(item.getId_Item());
 
         repository.save(newItem);
@@ -67,7 +67,7 @@ public class ItemService {
         modifiedItem.setMeasure(item.getMeasure());
         modifiedItem.setUnit(item.getUnit());
         modifiedItem.setPercentage_Consumed(item.getPercentage_Consumed());
-        modifiedItem.setId_Person(item.getId_Person());
+        modifiedItem.setPerson(item.getPerson());
         modifiedItem.setId_Item(item.getId_Item());
 
         repository.save(modifiedItem);
