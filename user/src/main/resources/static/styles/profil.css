@@ -64,7 +64,7 @@ input[type="number"] {
     max-width: 1200px;
 }
 
-.history article {
+article {
     border: 1px solid #c3cfd9;
     padding: 1.5em;
     border-radius: 10px;

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>mes invités</title>
+</head>
+<body>
+<div th:fragment="update_guest(chouille, guests)">
+    <h2>Mes invités</h2>
+    <th:block th:if="${!guests.isEmpty()}" th:each="guest,state : ${guests}">
+        <div>
+            <p th:text="${guest.name}"></p>
+            <button class="delete">Supprimer</button><!--TODO : add tooltip-->
+        </div>
+    </th:block>
+    <div>
+        <p>Id Secret : <span th:text="${chouille.code}"></span></p>
+        <button id="copy_code">Copier l'ID</button>
+    </div>
+    <p>Places restantes : <span><!--TODO: add chouille.location.Max_Pers--></span></p>
+</div>
+</body>
+</html>

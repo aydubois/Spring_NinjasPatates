@@ -1,6 +1,7 @@
 package org.abr.audreybr.controller;
 
 import javassist.NotFoundException;
+import org.abr.audreybr.dto.ChouilleDTO;
 import org.abr.audreybr.entity.Chouille;
 import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.entity.Person;
@@ -14,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ViewController {
@@ -26,15 +30,18 @@ public class ViewController {
     @Autowired
     private ChouilleService serviceChouille;
 
-    @GetMapping(path = "/profil")
-    public String index(Model model) throws NotFoundException {
-        Person person = servicePerson.getPerson(1);
+    @GetMapping(path = "/profil/{id}")
+    public String index(@PathVariable Integer id, Model model) throws NotFoundException {
+        Person person = servicePerson.getPerson(id);
         model.addAttribute("person",person);
-        /*TODO : Il faut aussi rajouter tous les lieux lié à la personne + 3 dernières chouilles passées */
-        List<Location> locations = serviceLocation.getAll();
+        List<Location> locations = serviceLocation.getByHost(id); //transform Optional => List
+        /*model.addAttribute("test", locations.get(0));*/
         model.addAttribute("locations", locations);
-        List<Chouille> chouilles = serviceChouille.getAll();
+        /*TODO : 3 dernières chouilles passées */
+
+        List<Chouille> chouilles = serviceChouille.getChouilleListByIdPersonOrderedByDate(id);
         model.addAttribute("chouilles", chouilles);
+
         return "profil";
     }
     @PutMapping(path ="/location/put/{id}")
@@ -44,16 +51,31 @@ public class ViewController {
 
     @GetMapping(path = "/myChouilles/{id}")
     public String getMyChouilles(@PathVariable("id") int id, Model model) throws NotFoundException {
-        List<Chouille> chouilles = serviceChouille.getMyChouilles(id);
+        // Add person into model
+        Person person = servicePerson.getPerson(id);
+        model.addAttribute("person",person);
+
+        //add chouille with location into model
+        List<Chouille> chouilles = serviceChouille.getMyChouillesInProgress(id);
+
         model.addAttribute("chouilles",chouilles);
+
+        //add new chouille into model
+        model.addAttribute("newChouille",new Chouille());
+
+        //add locations into model
+        List<Location> locations = serviceLocation.getByHost(id);
+        model.addAttribute("locations", locations);
         return "chouilles_mine";
     }
 
     @GetMapping(path = "/otherChouilles/{id}")
     public String getChouillesWhereIamInvited(@PathVariable("id") int id, Model model) throws NotFoundException {
-        List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
+        Person person = servicePerson.getPerson(id);
+        model.addAttribute("person",person);
+        /*List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
         model.addAttribute("chouilles",chouilles);
-        return "chouilles_other";
+        */return "chouilles_other";
     }
 
 

@@ -2,14 +2,52 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mes chouilles</title>
+    <title>mes chouilles</title>
+    <th:block th:insert="~{fragments/header :: link}"></th:block>
+    <link th:href="@{/styles/profil.css}" rel="stylesheet" />
 </head>
 <body>
-    <h2>Mes miennes</h2>
-    <article th:each="chouille : ${chouilles}">
-        <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
-        <p>Date : <span th:text="${chouille.Date}"></span></p>
-        <p>Lieu :  <span th:text="${chouille.Id_Location}"></span></p>
-    </article>
+
+<div th:replace="~{fragments/header :: header1(${person.id_Person})}"></div>
+<main>
+    <section>
+        <h2>Mes chouilles en cours de préparation</h2>
+        <article  th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
+            <p>Thème : <span th:text="${chouille.thematic}"></span></p>
+            <p>Date : <span th:text="${chouille.date}"></span></p>
+            <p>Lieu :  <span th:text="${chouille.location.adress}"></span></p>
+            <p>Places restantes : <span  th:text="${chouille.location.max_Pers}"></span></p>
+            <button>Modifier</button>
+            <button>Gérer mon stock</button>
+            <button>Gérer les invités</button>
+        </article>
+        <p th:if="${chouilles.isEmpty()}">Aucune chouille de prévue pour le moment.</p>
+    </section>
+    <section>
+        <h2>Créer une Chouille</h2>
+        <form action="#"
+            th:action="@{/chouille/create/{id}(id=${person?.id_Person})}"
+            th:method="post"
+            th:object="${newChouille}">
+            <div>
+                <label for="thematic">Thème : </label>
+                <input id="thematic" type="text" placeholder="Anniversaire" th:field="*{thematic}" />
+            </div>
+            <div>
+                <label for="date">Date : </label>
+                <input id="date" type="date"  th:field="*{date}" />
+            </div>
+            <div>
+                <label for="address">Lieu : </label>
+                <select name="address" id="address" th:field="*{location}">
+                    <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
+                        <option th:value="${location}" th:text="${location.adress}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <input type="submit" value="Créer" />
+        </form>
+    </section>
+</main>
 </body>
 </html>

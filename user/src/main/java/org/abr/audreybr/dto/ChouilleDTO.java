@@ -2,6 +2,9 @@ package org.abr.audreybr.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.abr.audreybr.dao.LocationRepository;
+import org.abr.audreybr.entity.Location;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -9,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Optional;
 
 @Getter
 @Setter
 public class ChouilleDTO implements Serializable {
+    @Autowired
+    LocationRepository repository;
 
     private Integer Id_Chouille;
 
@@ -20,7 +26,7 @@ public class ChouilleDTO implements Serializable {
 
     private Date Date;
 
-    private Integer Id_Location;
+    private Location Location;
 
     private Integer Id_Person_Sam;
 
@@ -28,11 +34,15 @@ public class ChouilleDTO implements Serializable {
 
     private String code;
 
-    public ChouilleDTO(Integer id_Chouille, String thematic, java.sql.Date date, Integer id_Location, Integer id_Person_Sam, Integer id_Person_Bouncer, String code) {
+    public ChouilleDTO(Integer id_Chouille, String thematic, java.sql.Date date, Integer id_location, Integer id_Person_Sam, Integer id_Person_Bouncer, String code) {
         Id_Chouille = id_Chouille;
         Thematic = thematic;
+
+        Optional<Location> locationOptional =  repository.findById(id_location);
+        if(locationOptional.isPresent()){
+            Location = locationOptional.get();
+        }
         Date = date;
-        Id_Location = id_Location;
         Id_Person_Sam = id_Person_Sam;
         Id_Person_Bouncer = id_Person_Bouncer;
         this.code = code;
@@ -62,12 +72,12 @@ public class ChouilleDTO implements Serializable {
         Date = date;
     }
 
-    public Integer getId_Location() {
-        return Id_Location;
+    public Location geLocation() {
+        return Location;
     }
 
-    public void setId_Location(Integer id_Location) {
-        Id_Location = id_Location;
+    public void setLocation(Location Location) {
+        Location = Location;
     }
 
     public Integer getId_Person_Sam() {

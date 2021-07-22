@@ -2,9 +2,38 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>on m'invite</title>
+    <th:block th:insert="~{fragments/header :: link}"></th:block>
+    <link th:href="@{/styles/profil.css}" rel="stylesheet" />
 </head>
 <body>
-    <h2>Les leurs</h2>
+
+<div th:replace="~{fragments/header :: header1(${person.Id_Person})}"></div>
+<main>
+    <section>
+        <h2>Les Chouilles où je suis invité.e</h2>
+        <article  th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
+            <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
+            <p>Date : <span th:text="${chouille.Date}"></span></p>
+            <p>Lieu :  <span th:text="${chouille.Id_Location}"><!--TODO ajouter chouille.location.Adress--></span></p>
+            <button>Gérer ce que je rapporte</button>
+            <button>Annuler ma venue</button>
+        </article>
+        <p th:if="${chouilles.isEmpty()}">Aucune chouille de prévue pour le moment.</p>
+    </section>
+    <section>
+        <h2>Rejoindre une Chouille</h2>
+        <form action="#"
+              th:action="@{/chouille/addperson/{id}/(id=${person?.Id_Person})}"
+              th:method="post"
+              th:object="${chouille}">
+            <div>
+                <label for="idsecret">Id Secret : </label>
+                <input id="idsecret" type="text" placeholder="AF34R3KZ" th:field="*{code}" />
+            </div>
+            <input type="submit" value="Rejoindre" />
+        </form>
+    </section>
+</main>
 </body>
 </html>

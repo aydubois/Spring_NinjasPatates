@@ -12,29 +12,75 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id_Person;
+    private Integer id_Person;
 
     @Column
-    private String name;
+    private String username;
+
+    @Column
+    private String password;
+
+    @Column
+    private String role;
+
+    @Column
+    private Integer enabled;
 
     public Person(Integer id_Person, String name) {
-        Id_Person = id_Person;
-        this.name = name;
+        this.id_Person = id_Person;
+        this.username = name;
     }
 
+    public Person(Integer id_Person, String name, String password) {
+        this.id_Person = id_Person;
+        this.username = name;
+        this.password = password;
+    }
+
+    public Person(Integer id_Person, String name, String password, String role, Integer enabled ) {
+        this.id_Person = id_Person;
+        this.username = name;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
     public Integer getId_Person() {
-        return Id_Person;
+        return id_Person;
     }
 
     public void setId_Person(Integer id_Person) {
-        Id_Person = id_Person;
+        this.id_Person = id_Person;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
     }
 }

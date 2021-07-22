@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -12,53 +14,66 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id_Location;
+    private Integer id_Location;
 
     @Column
-    private String Adress;
+    private String adress;
 
     @Column
-    private Integer Max_Pers;
+    private Integer max_Pers;
 
-    @Column
-    private Integer Id_Person_Host;
+    @ManyToOne
+    @JoinColumn (name="Id_Person_Host")
+    private Person host;
 
-    public Location(Integer id_Location, String adress, Integer max_Pers, Integer id_Person_Host) {
-        Id_Location = id_Location;
-        Adress = adress;
-        Max_Pers = max_Pers;
-        Id_Person_Host = id_Person_Host;
+    /*@OneToMany(mappedBy="location")
+    private List<Chouille> chouilles;*/
+
+    public Location(Integer id_Location, String adress, Integer max_Pers, Person host) {
+        this.id_Location = id_Location;
+        this.adress = adress;
+        this.max_Pers = max_Pers;
+        this.host = host;
     }
 
     public Integer getId_Location() {
-        return Id_Location;
+        return id_Location;
     }
 
     public void setId_Location(Integer id_Location) {
-        Id_Location = id_Location;
+        this.id_Location = id_Location;
     }
 
     public String getAdress() {
-        return Adress;
+        return adress;
     }
 
     public void setAdress(String adress) {
-        Adress = adress;
+        this.adress = adress;
     }
 
     public Integer getMax_Pers() {
-        return Max_Pers;
+        return max_Pers;
     }
 
     public void setMax_Pers(Integer max_Pers) {
-        Max_Pers = max_Pers;
+        this.max_Pers = max_Pers;
     }
 
-    public Integer getId_Person_Host() {
-        return Id_Person_Host;
+    public Person getHost() {
+        return host;
     }
 
-    public void setId_Person_Host(Integer id_Person_Host) {
-        Id_Person_Host = id_Person_Host;
+    public void setHost(Person host) {
+        this.host = host;
     }
+
+   /* public List<Chouille> getChouilles() {
+        return chouilles;
+    }
+
+    public void addChouilles(Chouille chouille) {
+        if(!this.chouilles.contains(chouille))
+        this.chouilles.add(chouille);
+    }*/
 }

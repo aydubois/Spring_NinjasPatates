@@ -7,17 +7,17 @@
     <link th:href="@{/styles/header.css}" rel="stylesheet" />
 </head>
 <body>
-    <header th:fragment="header1">
+    <header th:fragment="header1(id_person)">
         <div>
             <h1>Chouille Planner</h1>
         </div>
         <nav>
             <ul>
-                <li><img th:src="@{/pictures/profil.svg}"><a th:href="@{/profil}">Mon Profil</a></li>
+                <li><img th:src="@{/pictures/profil.svg}"><a th:href="@{/profil/{id}(id=${id_person})}">Mon Profil</a></li>
                 <li class="drop-down-menu"> <img th:src="@{/pictures/party.svg}">Chouilles
                     <ul>
-                        <li><a th:href="@{/chouilles/mine}">Mes miennes</a></li>
-                        <li><a th:href="@{/chouilles/other}">On m'invite</a></li>
+                        <li><a th:href="@{/myChouilles/{id}(id=${id_person})}">Mes miennes</a></li>
+                        <li><a th:href="@{/otherChouilles/{id}(id=${id_person})}">On m'invite</a></li>
                     </ul>
                 </li>
                 <li><img th:src="@{/pictures/deconnexion.svg}"><a>Me déconnecter</a></li>
