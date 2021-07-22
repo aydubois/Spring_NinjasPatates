@@ -20,8 +20,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build service registry eureka
-        run: ./eureka/mvnw verify
+        run: cd eureka && ./mvnw verify && cd ..
       - name: Build gateway
-        run: ./gateway/mvnw verify
+        run: cd gateway && ./mvnw verify && cd ..
       - name: Build chouille planner
-        run: ./user/mvnw verify
+        run: cd user && ./mvnw verify && cd ..
