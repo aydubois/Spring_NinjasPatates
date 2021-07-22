@@ -74,3 +74,38 @@ article {
     align-items: start;
     justify-content: center;
 }
+body{
+    position:relative;
+}
+.background-modal{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #614f66b0;
+    z-index: 3;
+}
+.modal{
+    position: absolute;
+    width: 30vw;
+    height: 30vh;
+    min-width: 500px;
+    min-height: 280px;
+    margin: 25vh 35vw;
+    z-index: 5;
+    background-color: #dfe6ed;
+    opacity: 1;
+    padding: 1em 2em;
+}
+p.close-modal{
+    text-align:right;
+    font-size:2em;
+    color:#6558f6;
+    cursor:pointer;
+}
+.modal form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}

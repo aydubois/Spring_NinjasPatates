@@ -73,9 +73,10 @@ public class ViewController {
     public String getChouillesWhereIamInvited(@PathVariable("id") int id, Model model) throws NotFoundException {
         Person person = servicePerson.getPerson(id);
         model.addAttribute("person",person);
-        /*List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
+        List<Chouille> chouilles = serviceChouille.getChouillesByGuest(person);
         model.addAttribute("chouilles",chouilles);
-        */return "chouilles_other";
+
+        return "chouilles_other";
     }
 
 

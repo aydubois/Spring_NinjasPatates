@@ -1,6 +1,7 @@
 package org.abr.audreybr.service;
 
 import org.abr.audreybr.dao.PersonRepository;
+import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.entity.Person;
 import org.abr.audreybr.exception.BadRequestException;
 import javassist.NotFoundException;
@@ -50,7 +51,29 @@ public class ChouilleService {
         repository.save(newChouille);
         return newChouille;
     }
+    public Chouille createBase(String thematic, java.sql.Date date, Location location){
+        if (thematic == null || thematic.isEmpty() ||
+                date == null ||
+                location == null ) {
+            throw new BadRequestException("Input values can't be empty");
+        }
 
+        Chouille newChouille = new Chouille();
+
+        newChouille.setThematic(thematic);
+        newChouille.setDate(date);
+
+        newChouille.setLocation(location);
+        newChouille.setCode("AEGKE542KL");
+        try{
+
+        repository.save(newChouille);
+        }catch(Exception e){
+            System.out.println("PATATATATATATE");
+            System.out.println(e.getMessage());
+        }
+        return newChouille;
+    }
     public Chouille getChouille(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette chouille n'existe pas"));
     }
@@ -64,9 +87,9 @@ public class ChouilleService {
         /*Person host = personRepository.findById(id).get();*/
         return repository.getChouilleListByLocationHostAndDate(id, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
     }
- /*   public List<Chouille> getChouillesWhereIamInvited(Integer id) throws NotFoundException {
-        return repository.getChouilleListByIdPerson(id);
-    }*/
+    public List<Chouille> getChouillesByGuest(Person guest) throws NotFoundException {
+        return repository.getChouillesByGuests(guest);
+    }
 
     public Chouille editChouille(Integer id, Chouille chouille) throws NotFoundException {
         if (chouille.getId_Chouille() == null) {
@@ -94,6 +117,13 @@ public class ChouilleService {
 
     public List<Chouille> getChouilleListByIdPersonOrderedByDate(Integer id){
         return repository.getChouilleListByIdPersonOrderedByDate(id, 3);
+    }
+
+    public void addPerson(Integer id_Person,String code){
+        Chouille chouille = repository.getChouilleByCode(code);
+        Person guest = personRepository.getOne(id_Person);
+        chouille.addGuest(guest);
+        repository.save(chouille);
     }
 
 }

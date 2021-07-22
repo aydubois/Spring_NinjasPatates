@@ -27,21 +27,20 @@
         <h2>Créer une Chouille</h2>
         <form action="#"
             th:action="@{/chouille/create/{id}(id=${person?.id_Person})}"
-            th:method="post"
-            th:object="${newChouille}">
+            th:method="post">
             <div>
                 <label for="thematic">Thème : </label>
-                <input id="thematic" type="text" placeholder="Anniversaire" th:field="*{thematic}" />
+                <input id="thematic" type="text" placeholder="Anniversaire" th:name="thematic" th:value="${newChouille.thematic}" />
             </div>
             <div>
                 <label for="date">Date : </label>
-                <input id="date" type="date"  th:field="*{date}" />
+                <input id="date" type="date"  th:name="date" th:value="${newChouille.date}" />
             </div>
             <div>
                 <label for="address">Lieu : </label>
-                <select name="address" id="address" th:field="*{location}">
-                    <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
-                        <option th:value="${location}" th:text="${location.adress}"></option>
+                <select name="address" id="address" th:name="location" th:value="${newChouille.location}">
+                    <th:block th:if="${!locations.isEmpty()}" th:each="loc,state : ${locations}">
+                        <option th:value="${loc.id_Location}" th:text="${loc.adress}"></option>
                     </th:block>
                 </select>
             </div>

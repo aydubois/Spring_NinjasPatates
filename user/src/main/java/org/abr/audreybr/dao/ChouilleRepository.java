@@ -26,10 +26,11 @@ public interface ChouilleRepository extends JpaRepository<Chouille, Integer> {
 
     @Query(value = "SELECT * FROM Chouille c inner join Persons_Chouilles PC on c.id_Chouille = PC.Id_Chouille WHERE PC.Id_Person = :idUser ORDER BY c.date DESC LIMIT :limit",
             nativeQuery = true)
-    public List<Chouille> getChouilleListByIdPersonOrderedByDate(@Param("idUser") Integer id_person,@Param("limit")  Integer limit);
-/*
-    @Query(value = "select * from Chouille C inner join Persons_Chouilles PC on C.Id_Chouille = PC.Id_Chouille where PC.Id_Person = :idUser",
-            nativeQuery = true)
-    List<Chouille> getChouilleListByIdPerson(@Param("idUser") Integer id);*/
+    List<Chouille> getChouilleListByIdPersonOrderedByDate(@Param("idUser") Integer id_person,@Param("limit")  Integer limit);
 
+   /* @Query(value = "select * from Chouille C inner join Persons_Chouilles PC on C.Id_Chouille = PC.Id_Chouille where PC.Id_Person = :idUser",
+            nativeQuery = true)*/
+    List<Chouille> getChouillesByGuests(Person guest);
+
+    Chouille getChouilleByCode(String code);
 }
