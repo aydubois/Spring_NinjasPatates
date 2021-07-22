@@ -1,3 +1,4 @@
 springSecurity.code-workspace
+user/src/main/resources/application.yml
 /dbdata/
 docker-compose.yml

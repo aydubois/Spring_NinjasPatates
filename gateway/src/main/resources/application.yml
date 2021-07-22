@@ -1,0 +1,18 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka
+server:
+  port: 8050
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id : chouilleplanner
+          uri: lb://chouilleplanner
+          predicates:
+            - Path=/profil/**
+          # filters:
+          #   - RewritePath=/profil/(?<segment>.*), http://127.0.0.1:8082/profil/$\{segment}

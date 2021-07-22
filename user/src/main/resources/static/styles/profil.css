@@ -1,0 +1,76 @@
+section {
+    max-width: 1200px;
+    margin: auto;
+    border-bottom: 1px solid #dfe6ed;
+    padding: 2em 0;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: ;
+    font-weight: 900;
+}
+input[type="submit"], button {
+    background-color: #6558f6;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #f7f9fa;
+}
+
+section.party-management form {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+
+main{
+    background-color: #f7f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 5em 0;
+}
+
+button.delete-location {
+    background-color: #e35555;
+}
+section.party-management form div {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: start;
+}
+input#address {
+    min-width: 45ch;
+}
+section.party-management form:last-of-type, section:last-of-type {
+    border: none;
+}
+
+section.party-management form {
+    border-bottom: 1px solid #dfe6ed;
+    padding: 2em 0;
+}
+
+input[type="number"] {
+    max-width: 5ch;
+}
+
+.history > div {
+    display: grid;
+    grid: auto-flow /repeat(3, 1fr);
+    gap: 3em;
+    max-width: 1200px;
+}
+
+.history article {
+    border: 1px solid #c3cfd9;
+    padding: 1.5em;
+    border-radius: 10px;
+    background-color: #dfe6ed;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}

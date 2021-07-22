@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: chouilleplanner
   mvc:
     hiddenmethod:
       filter:
@@ -7,10 +9,14 @@ spring:
     show-sql: true
     hibernate:
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
-    url: jdbc:mysql://localhost:3306/java
-    username: ali
-    password: 'password'
+    url: jdbc:mysql://localhost:3306/chouillePlanner
+    username: root
+    password: '{SQL}#42sqlpass'
 server:
   port: 8082
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka
