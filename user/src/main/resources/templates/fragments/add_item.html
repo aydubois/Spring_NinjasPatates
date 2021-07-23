@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ajouter un objet</title>
+</head>
+<body>
+<div class="modal modal-item" th:fragment="add_item(id_Person, id_Chouille)">
+    <p class="close-modal">X</p>
+    <h2>Ajout dans le stock</h2>
+    <form action="#"
+          th:action="@{/item/create/{id}(id=${id_person})}"
+          th:method="post" >
+        <div>
+            <label for="type">Type :</label>
+            <input id="type" type="text" placeholder="Bière, jeux société ..."
+                   th:name="type" />
+        </div>
+        <div>
+            <label for="quantity">Nombre :</label>
+            <input id="quantity" type="number"
+                   th:name="quantity" />
+        </div>
+        <div>
+            <label for="measure">Nombre :</label>
+            <input id="measure" type="number"
+                   th:name="measure" />
+        </div>
+        <div>
+            <label for="unit">Type :</label>
+            <input id="unit" type="text" placeholder="cl, litre, pièce, ..."
+                   th:name="unit" />
+        </div>
+        <input type="hidden" th:name="id_Person" th:value="${id_Person}" >
+        <input type="hidden" th:name="id_Chouille" th:value="${id_Chouille}" >
+        <input type="submit" value="Ajouter" />
+    </form>
+</div>
+</body>
+</html>

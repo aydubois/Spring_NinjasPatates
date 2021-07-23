@@ -5,29 +5,28 @@
     <title>modifier une chouille</title>
 </head>
 <body>
-<div th:fragment="update_chouille(chouille)">
+<div class="modal" th:fragment="update_chouille(chouille, locations)">
+    <p class="close-modal close-modal-chouille">X</p>
     <h2>Modification</h2>
     <p class="warning">* La modification enverra une notification à tous les invités.</p>
     <form action="#"
-          th:action="@{/chouille/update/{id}(id=${chouille.Id_Chouille})}"
-          th:method="post"
-          th:object="${chouille}" >
+          th:action="@{/chouille/update/{id}(id=${chouille.id_Chouille})}"
+          th:method="post" >
         <div>
             <label for="thematic">Thème : </label>
-            <input id="thematic" type="text" placeholder="Anniversaire" th:field="*{Thematic}" />
+            <input id="thematic" type="text" placeholder="Anniversaire" th:name="thematic" th:value="${chouille.thematic}" />
         </div>
         <div>
             <label for="date">Date : </label>
-            <input id="date" type="date"  th:field="*{Date}" />
+            <input id="date" type="date"  th:name="date" th:value="${chouille.date}" />
         </div>
         <div>
             <label for="address">Lieu : </label>
-            <input id="address" list="list_address"  th:field="*{Adress}" />
-            <datalist id="list_address">
-                <th:block th:if="${!locations.isEmpty()}" th:each="location,state : ${locations}">
-                    <option th:value="location.Id_Location" th:text="location.Adress"></option>
+            <select name="address" id="address" th:name="location" th:value="${chouille.location}">
+                <th:block th:if="${!locations.isEmpty()}" th:each="loc : ${locations}">
+                    <option th:value="${loc.id_Location}" th:text="${loc.adress}"></option>
                 </th:block>
-            </datalist>
+            </select>
         </div>
         <input type="submit" value="Modifier" />
     </form>

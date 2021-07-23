@@ -5,19 +5,20 @@
     <title>mes invités</title>
 </head>
 <body>
-<div th:fragment="update_guest(chouille, guests)">
+<div class="modal" th:fragment="update_guest(chouille, guests)">
+    <p class="close-modal-guest close-modal">X</p>
     <h2>Mes invités</h2>
     <th:block th:if="${!guests.isEmpty()}" th:each="guest,state : ${guests}">
-        <div>
-            <p th:text="${guest.name}"></p>
-            <button class="delete">Supprimer</button><!--TODO : add tooltip-->
+        <div class="flex-row">
+            <p th:text="${guest.username}"></p>
+            <button class="delete delete-guest" ><a th:href="@{/chouille/deleteguest/{id}/{id2}(id=${chouille.id_Chouille}, id2=${guest.id_Person})}">Supprimer</a></button><!--TODO : add tooltip-->
         </div>
     </th:block>
     <div>
         <p>Id Secret : <span th:text="${chouille.code}"></span></p>
         <button id="copy_code">Copier l'ID</button>
     </div>
-    <p>Places restantes : <span><!--TODO: add chouille.location.Max_Pers--></span></p>
+    <p>Places restantes : <span th:text="${chouille.location.max_Pers - chouille.guests.size()}"><!--TODO: add chouille.location.Max_Pers--></span></p>
 </div>
 </body>
 </html>

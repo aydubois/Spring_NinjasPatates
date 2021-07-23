@@ -4,6 +4,14 @@ section {
     border-bottom: 1px solid #dfe6ed;
     padding: 2em 0;
 }
+.flex-row{
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    gap: 3em;
+    justify-content: flex-end;
+    margin-right: 28%;
+}
 h2 {
     text-align: center;
     margin-bottom: 1em;
@@ -73,4 +81,47 @@ article {
     flex-direction: column;
     align-items: start;
     justify-content: center;
+}
+.grid-3{
+    display: grid;
+    grid: auto-flow / 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+.background-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #614f66b0;
+    z-index: 3;
+}
+.modal{
+    position: fixed;
+    width: 30vw;
+    height: 30vh;
+    min-width: 500px;
+    min-height: 280px;
+    margin: 25vh 35vw;
+    z-index: 5;
+    background-color: #dfe6ed;
+    opacity: 1;
+    padding: 1em 2em;
+}
+.modal.modal-item{
+    height:40vh;
+}
+p.close-modal{
+    text-align:right;
+    font-size:2em;
+    color:#6558f6;
+    cursor:pointer;
+}
+.modal form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
 }
