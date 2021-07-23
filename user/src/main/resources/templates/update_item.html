@@ -13,12 +13,12 @@
         <div style="display:none" th:id="modal_add_item" class="background-modal" th:insert="~{fragments/add_item :: add_item(${person.id_Person}, ${chouille.id_Chouille})}"></div>
         <section>
         <h2>Mon stock pour la chouille du <span th:text="${chouille.date}"></span> chez <span th:text="${chouille.location.host.username}"></span></h2>
-            <article  th:if="${!items.isEmpty()}" th:each="item : ${items}">
-                <p>Type : <span th:text="${item.type}"></span></p>
+            <article class="flex-row" th:if="${!items.isEmpty()}" th:each="item : ${items}">
+                <p>Type : <span th:text="${item?.type}"></span></p>
                 <p>Nombre : <span th:text="${item.quantity}"></span></p>
                 <p>Quantité :  <span th:text="${item.measure}"></span></p>
                 <p>Unité :  <span th:text="${item.unit}"></span></p>
-                <button><a th:href="@{/item/deleteitem/{id}(id=${item.id_Item})}">Supprimer</a></button>
+                <button class="delete"><a th:href="@{/item/deleteitem/{id}(id=${item.id_Item})}">Supprimer</a></button>
             </article>
             <button id="open_modal_add_item">Ajouter un nouvel objet</button>
         </section>
@@ -38,3 +38,4 @@
             })
     })
 </script>
+

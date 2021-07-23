@@ -18,8 +18,7 @@
         <article  th:if="${!chouilles.isEmpty()}" th:each="chouille, state : ${chouilles}">
             <div style="display:none" th:id="modal_update_chouille_+${state.index}" class="background-modal" th:insert="~{fragments/update_chouille :: update_chouille(${chouille}, ${locations})}"></div>
             <div style="display:none" th:id="modal_update_guests_+${state.index}" class="background-modal" th:insert="~{fragments/update_guest :: update_guest(${chouille}, ${chouille.guests})}"></div>
-            <!--<div style="display:none" th:id="modal_update_items_+${state.index}" class="background-modal" th:insert="~{fragments/update_item :: update_item(${chouille}, ${chouille.guests})}"></div>
-            --><p>Thème : <span th:text="${chouille.thematic}"></span></p>
+            <p>Thème : <span th:text="${chouille.thematic}"></span></p>
             <p>Date : <span th:text="${chouille.date}"></span></p>
             <p>Lieu :  <span th:text="${chouille.location.adress}"></span></p>
             <p>Places max : <span  th:text="${chouille.location.max_Pers}"></span></p>
@@ -32,7 +31,7 @@
     </section>
     <section>
         <h2>Créer une Chouille</h2>
-        <form action="#"
+        <form class="form-add-chouille" action="#"
             th:action="@{/chouille/create/{id}(id=${person?.id_Person})}"
             th:method="post">
             <div>
@@ -87,4 +86,23 @@
             })
         })
     }
+
+    function copy() {
+      let copyText = document.querySelector("#code-copied");
+      copyText.select();
+      document.execCommand("copy");
+    }
+
+    let allCopy = document.querySelectorAll("#copy_code")
+    for(let i = 0;i < allCopy.length;i++){
+        allCopy[i].addEventListener("click", (e)=>{
+
+            let idParent = e.target.parentElement.parentElement.parentElement.id
+            let input = document.querySelector("#"+idParent+" #code-copied");
+            input.addEventListener('keydown', (e)=>{e.preventDefault()})
+            input.select();
+            document.execCommand("copy");
+        })
+    }
+
 </script>
