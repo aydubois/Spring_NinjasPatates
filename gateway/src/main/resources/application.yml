@@ -13,6 +13,6 @@ spring:
         - id : chouilleplanner
           uri: lb://chouilleplanner
           predicates:
-            - Path=/profil/**
+            - Path=/**
           # filters:
           #   - RewritePath=/profil/(?<segment>.*), http://127.0.0.1:8082/profil/$\{segment}

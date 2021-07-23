@@ -1,0 +1,2 @@
+docker stop chouille-planner eureka gateway mysql
+docker system prune -f
