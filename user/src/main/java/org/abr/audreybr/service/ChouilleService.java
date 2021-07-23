@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,10 +65,31 @@ public class ChouilleService {
         newChouille.setDate(date);
 
         newChouille.setLocation(location);
-        newChouille.setCode("AEGKE542KL");
+        newChouille.setCode(this.createCode());
         try{
 
         repository.save(newChouille);
+        }catch(Exception e){
+            System.out.println("PATATATATATATE");
+            System.out.println(e.getMessage());
+        }
+        return newChouille;
+    }
+    public Chouille updateBase(Integer id, String thematic, java.sql.Date date, Location location){
+        if (id == null ||thematic == null || thematic.isEmpty() ||
+                date == null ||
+                location == null ) {
+            throw new BadRequestException("Input values can't be empty");
+        }
+
+        Chouille newChouille = repository.getOne(id);
+
+        newChouille.setThematic(thematic);
+        newChouille.setDate(date);
+
+        newChouille.setLocation(location);
+        try{
+            repository.save(newChouille);
         }catch(Exception e){
             System.out.println("PATATATATATATE");
             System.out.println(e.getMessage());
@@ -126,4 +148,15 @@ public class ChouilleService {
         repository.save(chouille);
     }
 
+    public void deleteGuest(Chouille chouille, Person guest){
+        chouille.deleteGuest(guest);
+        repository.save(chouille);
+    }
+
+    private String createCode(){
+        String[] letters = {"A","B", "C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","U","V","W","X","Y","Z"};
+        String[] numbers = {"1","2","3","4","5","6","7","8","9"};
+        String value = letters[(int)(Math.random() * ((letters.length - 0) + 1))]+letters[(int)(Math.random() * ((letters.length - 0) + 1))]+letters[(int)(Math.random() * ((letters.length - 0) + 1))]+numbers[(int)(Math.random() * ((numbers.length - 0) + 1))]+numbers[(int)(Math.random() * ((numbers.length - 0) + 1))]+letters[(int)(Math.random() * ((letters.length - 0) + 1))];
+        return value;
+    }
 }

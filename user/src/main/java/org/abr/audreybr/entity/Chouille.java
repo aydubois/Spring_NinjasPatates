@@ -131,4 +131,9 @@ public class Chouille {
             this.guests.add(guest);
         }
     }
+
+    public void deleteGuest(Person guest){
+        if(this.guests.contains(guest))
+            this.guests.remove(guest);
+    }
 }

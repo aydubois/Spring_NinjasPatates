@@ -50,7 +50,7 @@
                                 th:name="max_Pers" th:value="${loc.max_Pers}"/>
                         <div>
                             <input type="submit" value="modifier" />
-                            <button class="delete-location">Supprimer</button> <!--TODO: faire ajax ?? -->
+                            <button class="delete-location"><a th:href="@{/location/delete/{id}(id=${loc.id_Location})}">Supprimer</a></button> <!--TODO: faire ajax ?? -->
                         </div>
                     </div>
                 </form>

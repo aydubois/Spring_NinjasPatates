@@ -69,4 +69,12 @@ public class LocationController {
         return redirectView;
     }
 
+    @GetMapping("/delete/{id}")
+    public  RedirectView deleteLocation(@PathVariable Integer id) throws NotFoundException {
+        Person host = locationService.getLocation(id).getHost();
+        locationService.deleteLocation(id);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:8082/profil/" + host.getId_Person());
+        return redirectView;
+    }
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>on m'invite</title>
+    <th:block th:insert="~{fragments/header :: link}"></th:block>
+    <link th:href="@{/styles/profil.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header1(${person.id_Person})}"></div>
+    <main>
+        <div style="display:none" th:id="modal_add_item" class="background-modal" th:insert="~{fragments/add_item :: add_item(${person.id_Person}, ${chouille.id_Chouille})}"></div>
+        <section>
+        <h2>Mon stock pour la chouille du <span th:text="${chouille.date}"></span> chez <span th:text="${chouille.location.host.username}"></span></h2>
+            <article  th:if="${!items.isEmpty()}" th:each="item : ${items}">
+                <p>Type : <span th:text="${item.type}"></span></p>
+                <p>Nombre : <span th:text="${item.quantity}"></span></p>
+                <p>Quantité :  <span th:text="${item.measure}"></span></p>
+                <p>Unité :  <span th:text="${item.unit}"></span></p>
+                <button><a th:href="@{/item/deleteitem/{id}(id=${item.id_Item})}">Supprimer</a></button>
+            </article>
+            <button id="open_modal_add_item">Ajouter un nouvel objet</button>
+        </section>
+    </main>
+</body>
+</html>
+
+<script type="text/javascript">
+    let button_modal_add_item = document.querySelector("#open_modal_add_item")
+    let modal = document.querySelector("#modal_add_item")
+    button_modal_add_item.addEventListener('click', (e)=>{
+            modal.style.display = 'block'
+
+            let button_close_modal = document.querySelector(".close-modal")
+            button_close_modal.addEventListener('click', ()=>{
+                modal.style.display = 'none'
+            })
+    })
+</script>

@@ -1,6 +1,8 @@
 package org.abr.audreybr.service;
 
+import org.abr.audreybr.entity.Chouille;
 import org.abr.audreybr.entity.Item;
+import org.abr.audreybr.entity.Person;
 import org.abr.audreybr.exception.BadRequestException;
 import javassist.NotFoundException;
 import org.abr.audreybr.dao.ItemRepository;
@@ -14,7 +16,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -55,7 +60,27 @@ public class ItemService {
         repository.save(newItem);
         return newItem;
     }
+     public Item createBase(String type, Integer quantity, Integer measure, String unit, Person person, Chouille chouille){
+         if ( type == null ||
+                 quantity == null ||
+                 measure == null ||
+                 unit == null ||
+                 person== null ||
+                chouille == null) {
+             throw new BadRequestException("Input values can't be empty");
+         }
+         Item newItem = new Item();
 
+         newItem.setType(type);
+         newItem.setQuantity(quantity);
+         newItem.setMeasure(measure);
+         newItem.setUnit(unit);
+         newItem.setPerson(person);
+         newItem.setChouille(chouille);
+
+         repository.save(newItem);
+         return newItem;
+     }
     public Item editItem(Integer id, Item item) throws NotFoundException {
         if (item.getId_Item() == null) {
             throw new BadRequestException("Input values can't be empty");
@@ -81,5 +106,16 @@ public class ItemService {
         return ResponseEntity.status(HttpStatus.OK).body("La item (" + item.getId_Item() + ") a bien été supprimé");
     }
 
+    public List<Item> getItemByPersonAndChouille(Person person, Chouille chouille){
+        Optional items =repository.getItemByPersonAndChouille(person, chouille);
 
+        return this.toList(items);
+    }
+
+
+    public static <T> List<T> toList(Optional<T> opt) {
+        return opt.isPresent()
+                ? Collections.singletonList(opt.get())
+                : Collections.emptyList();
+    }
 }

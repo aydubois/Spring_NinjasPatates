@@ -9,18 +9,25 @@
 <body>
 
 <div th:replace="~{fragments/header :: header1(${person.id_Person})}"></div>
+<input type="hidden" id="chouille_selected">
 <main>
     <section>
         <h2>Mes chouilles en cours de préparation</h2>
-        <article  th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
-            <p>Thème : <span th:text="${chouille.thematic}"></span></p>
+        <div class="grid-3">
+
+        <article  th:if="${!chouilles.isEmpty()}" th:each="chouille, state : ${chouilles}">
+            <div style="display:none" th:id="modal_update_chouille_+${state.index}" class="background-modal" th:insert="~{fragments/update_chouille :: update_chouille(${chouille}, ${locations})}"></div>
+            <div style="display:none" th:id="modal_update_guests_+${state.index}" class="background-modal" th:insert="~{fragments/update_guest :: update_guest(${chouille}, ${chouille.guests})}"></div>
+            <!--<div style="display:none" th:id="modal_update_items_+${state.index}" class="background-modal" th:insert="~{fragments/update_item :: update_item(${chouille}, ${chouille.guests})}"></div>
+            --><p>Thème : <span th:text="${chouille.thematic}"></span></p>
             <p>Date : <span th:text="${chouille.date}"></span></p>
             <p>Lieu :  <span th:text="${chouille.location.adress}"></span></p>
-            <p>Places restantes : <span  th:text="${chouille.location.max_Pers}"></span></p>
-            <button>Modifier</button>
-            <button>Gérer mon stock</button>
-            <button>Gérer les invités</button>
+            <p>Places max : <span  th:text="${chouille.location.max_Pers}"></span></p>
+            <button class="update_chouille" th:data-value="${state.index}">Modifier</button>
+            <button><a th:href="${'/stock/' + {person.id_Person} + '/' + {chouille.id_Chouille}}">Gérer mon stock</a></button>
+            <button class="update_guests" th:data-value="${state.index}">Gérer les invités</button>
         </article>
+        </div>
         <p th:if="${chouilles.isEmpty()}">Aucune chouille de prévue pour le moment.</p>
     </section>
     <section>
@@ -50,3 +57,34 @@
 </main>
 </body>
 </html>
+<script type="text/javascript">
+    let buttons_open_modal_update_chouille = document.querySelectorAll(".update_chouille")
+    for(let i=0;i < buttons_open_modal_update_chouille.length; i++){
+        buttons_open_modal_update_chouille[i].addEventListener('click', (e)=>{
+            let index = e.target.getAttribute('data-value')
+            let modal = document.querySelector("#modal_update_chouille_"+index)
+            console.log("index, modal", index, modal)
+            modal.style.display = 'block'
+
+            let button_close_modal = document.querySelector("#modal_update_chouille_"+index+" .close-modal-chouille")
+            button_close_modal.addEventListener('click', ()=>{
+                modal.style.display = 'none'
+            })
+        })
+    }
+
+    let buttons_open_modal_update_guests = document.querySelectorAll(".update_guests")
+    for(let i=0;i < buttons_open_modal_update_guests.length; i++){
+        buttons_open_modal_update_guests[i].addEventListener('click', (e)=>{
+            let index = e.target.getAttribute('data-value')
+            let modal = document.querySelector("#modal_update_guests_"+index)
+            console.log("index, modal", index, modal)
+            modal.style.display = 'block'
+
+            let button_close_modal = document.querySelector("#modal_update_guests_"+index+" .close-modal-guest")
+            button_close_modal.addEventListener('click', ()=>{
+                modal.style.display = 'none'
+            })
+        })
+    }
+</script>

@@ -17,7 +17,7 @@
             <p>Date : <span th:text="${chouille.date}"></span></p>
             <p>Lieu :  <span th:text="${chouille.location.adress}"><!--TODO ajouter chouille.location.Adress--></span></p>
             <button>Gérer ce que je rapporte</button>
-            <button>Annuler ma venue</button>
+            <button><a th:href="@{/chouille/deleteguest/{id}/{id2}(id=${chouille.id_Chouille}, id2=${person.id_Person})}">Annuler ma venue</a></button>
         </article>
         <p th:if="${chouilles.isEmpty()}">Aucune chouille de prévue pour le moment.</p>
     </section>
