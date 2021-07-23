@@ -1,0 +1,9 @@
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/service/PersonService.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/exception/BadRequestException.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/controller/PersonController.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/dto/PersonDTO.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/entity/Person.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/exception/NotFoundException.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/controller/ViewController.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/dao/PersonRepository.java
+/Users/cda2020/IdeaProjects/Spring_NinjasPatates/auth/src/main/java/org/abr/audreybr/AudreyBrApplication.java
