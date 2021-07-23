@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -29,12 +31,12 @@ public class ViewController {
     @Autowired
     SessionService sessionService;
 
-    @GetMapping(path = "/myLogin")
+    @GetMapping(path = "/login")
     public String loginPage() {
         return "login";
     }
 
-    @PostMapping(path = "/myLogin")
+    @PostMapping(path = "/login")
     @ResponseBody
     public String login(HttpServletResponse response, @RequestParam String username, @RequestParam String password ) throws NotFoundException, IOException {
         if(username.isEmpty() || password.isEmpty()) return null;
@@ -47,7 +49,11 @@ public class ViewController {
             Session session = new Session();
             session.setId(cookie.getValue());
             session.setPerson_id(person);
-            session.setValid_until(new Date());
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.HOUR, 1);
+            session.setValid_until(calendar.getTime());
             sessionService.create(session);
             response.addCookie(cookie);
             response.sendRedirect("http://localhost:8082/myChouilles/"+person.getId_Person());
