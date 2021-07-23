@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: chouilleplanner
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    url: jdbc:mysql://localhost:3306/java
+    username: ali
+    password: 'password'
+server:
+  port: 8081
+

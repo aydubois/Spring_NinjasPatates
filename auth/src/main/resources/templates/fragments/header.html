@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <link th:href="@{/styles/base.css}" rel="stylesheet" />
+    <link th:href="@{/styles/header.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:fragment="header1">
+        <div>
+            <h1>Chouille Planner</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><img th:src="@{/pictures/profil.svg}"><a th:href="@{/profil}">Mon Profil</a></li>
+                <li class="drop-down-menu"> <img th:src="@{/pictures/party.svg}">Chouilles
+                    <ul>
+                        <li><a th:href="@{/chouilles/mine}">Mes miennes</a></li>
+                        <li><a th:href="@{/chouilles/other}">On m'invite</a></li>
+                    </ul>
+                </li>
+                <li><img th:src="@{/pictures/deconnexion.svg}"><a>Me déconnecter</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

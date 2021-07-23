@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes chouilles</title>
+</head>
+<body>
+    <h2>Mes miennes</h2>
+    <article th:each="chouille : ${chouilles}">
+        <p>Thème : <span th:text="${chouille.Thematic}"></span></p>
+        <p>Date : <span th:text="${chouille.Date}"></span></p>
+        <p>Lieu :  <span th:text="${chouille.Id_Location}"></span></p>
+    </article>
+</body>
+</html>
