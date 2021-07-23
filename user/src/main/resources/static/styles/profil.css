@@ -12,6 +12,10 @@ section {
     justify-content: flex-end;
     margin-right: 28%;
 }
+section article.flex-row{
+    margin-right:0;
+}
+
 h2 {
     text-align: center;
     margin-bottom: 1em;
@@ -26,7 +30,7 @@ input[type="submit"], button {
     color: #f7f9fa;
 }
 
-section.party-management form {
+section.party-management form, .form-add-chouille, .join-chouille {
     display: flex;
     gap: 1em;
     flex-direction: column;
@@ -40,10 +44,10 @@ main{
     padding: 5em 0;
 }
 
-button.delete-location {
+button.delete-location, button.delete {
     background-color: #e35555;
 }
-section.party-management form div {
+section.party-management form div,  .form-add-chouille div, .join-chouille div {
     display: flex;
     gap: 1em;
     align-items: center;
@@ -81,6 +85,7 @@ article {
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    gap:1em;
 }
 .grid-3{
     display: grid;
@@ -124,4 +129,8 @@ p.close-modal{
     justify-content: center;
     align-items: center;
     gap: 1em;
+}
+
+button a {
+    color: #f7f9fa;
 }
