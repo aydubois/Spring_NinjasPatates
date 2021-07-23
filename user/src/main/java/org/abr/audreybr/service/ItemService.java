@@ -63,8 +63,6 @@ public class ItemService {
      public Item createBase(String type, Integer quantity, Integer measure, String unit, Person person, Chouille chouille){
          if ( type == null ||
                  quantity == null ||
-                 measure == null ||
-                 unit == null ||
                  person== null ||
                 chouille == null) {
              throw new BadRequestException("Input values can't be empty");
@@ -107,15 +105,10 @@ public class ItemService {
     }
 
     public List<Item> getItemByPersonAndChouille(Person person, Chouille chouille){
-        Optional items =repository.getItemByPersonAndChouille(person, chouille);
+        return repository.getItemByPersonAndChouille(person, chouille);
 
-        return this.toList(items);
     }
 
 
-    public static <T> List<T> toList(Optional<T> opt) {
-        return opt.isPresent()
-                ? Collections.singletonList(opt.get())
-                : Collections.emptyList();
-    }
+
 }

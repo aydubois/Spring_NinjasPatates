@@ -16,14 +16,14 @@
             <p>Thème : <span th:text="${chouille.thematic}"></span></p>
             <p>Date : <span th:text="${chouille.date}"></span></p>
             <p>Lieu :  <span th:text="${chouille.location.adress}"><!--TODO ajouter chouille.location.Adress--></span></p>
-            <button>Gérer ce que je rapporte</button>
+            <button><a th:href="${'/stock/' + {person.id_Person} + '/' + {chouille.id_Chouille}}">Gérer mon stock</a></button>
             <button><a th:href="@{/chouille/deleteguest/{id}/{id2}(id=${chouille.id_Chouille}, id2=${person.id_Person})}">Annuler ma venue</a></button>
         </article>
         <p th:if="${chouilles.isEmpty()}">Aucune chouille de prévue pour le moment.</p>
     </section>
     <section>
         <h2>Rejoindre une Chouille</h2>
-        <form action="#"
+        <form class="join-chouille" action="#"
               th:action="@{/chouille/addperson/{id}(id=${person?.Id_Person})}"
               th:method="post">
             <div>

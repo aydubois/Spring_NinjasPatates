@@ -59,10 +59,26 @@ public class ItemController {
     @ResponseBody
     public RedirectView createItem(@PathVariable Integer id, @RequestParam String type, @RequestParam Integer quantity, @RequestParam Integer measure, @RequestParam String unit, @RequestParam Integer id_Person, @RequestParam Integer id_Chouille) throws NotFoundException {
         Person person = personService.getPerson(id_Person);
-        Chouille chouille = chouilleService.getChouille(id_Chouille);
+        Chouille chouille = chouilleService.getChouille( id_Chouille);
+        if(measure.equals("0"))
+            measure = null;
+        if(unit.equals("0"))
+            unit = null;
+
         itemService.createBase(type, quantity, measure, unit, person, chouille);
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:8082/stock/" + id_Person + "/"+id_Chouille);
         return redirectView;
+    }
+
+    @GetMapping("deleteitem/{id}")
+    public RedirectView deleteitem(@PathVariable Integer id) throws NotFoundException {
+        Integer id_Person = itemService.getItem(id).getPerson().getId_Person();
+        Integer id_Chouille = itemService.getItem(id).getChouille().getId_Chouille();
+        itemService.deleteItem(id);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:8082/stock/" + id_Person + "/"+id_Chouille);
+        return redirectView;
+
     }
 }

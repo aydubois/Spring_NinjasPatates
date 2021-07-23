@@ -14,11 +14,13 @@
             <button class="delete delete-guest" ><a th:href="@{/chouille/deleteguest/{id}/{id2}(id=${chouille.id_Chouille}, id2=${guest.id_Person})}">Supprimer</a></button><!--TODO : add tooltip-->
         </div>
     </th:block>
-    <div>
-        <p>Id Secret : <span th:text="${chouille.code}"></span></p>
+    <div class="flex-row">
+        <p>Id Secret : <input type="text" th:value="${chouille.code}" id="code-copied"></p>
         <button id="copy_code">Copier l'ID</button>
     </div>
-    <p>Places restantes : <span th:text="${chouille.location.max_Pers - chouille.guests.size()}"><!--TODO: add chouille.location.Max_Pers--></span></p>
+    <p>Places restantes : <span th:text="${chouille.location.max_Pers - chouille.guests.size()}"></span></p>
+
+
 </div>
 </body>
 </html>
