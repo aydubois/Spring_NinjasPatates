@@ -11,9 +11,15 @@ spring:
       naming:
         physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
+<<<<<<< HEAD
     url: jdbc:mysql://mysql:3306/chouillePlanner
     username: root
     password: '{SQL}#42sqlpass'
+=======
+    url: jdbc:mysql://localhost:3306/java
+    username: ali
+    password: 'password'
+>>>>>>> aliAuthService
 server:
   port: 8082
 eureka:
