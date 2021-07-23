@@ -1,0 +1,56 @@
+#!/bin/bash
+
+docker network create chouille-planner 2> /dev/null;
+
+docker run \
+	-d \
+	--rm \
+	--name mysql \
+	--network chouille-planner \
+	-p 3306:3306 \
+	-v /home/nagrarok/dev/docker-mysql-databases/5.7.31:/var/lib/mysql/ \
+	-e MYSQL_ROOT_PASSWORD="{SQL}#42sqlpass" \
+	mysql:5.7.31
+
+cd eureka && ./mvnw clean install package && cd ..
+
+docker build \
+	-t springio/gs-spring-boot-docker \
+	--build-arg TARGET='eureka/target/eureka-0.0.1-SNAPSHOT.jar' \
+	--tag eureka .
+
+docker run \
+	-d \
+	-p 8100:8100 \
+	--name eureka \
+	--network chouille-planner \
+	eureka
+
+cd gateway && ./mvnw clean install package && cd ..
+
+docker build \
+	-t springio/gs-spring-boot-docker \
+	--build-arg TARGET='gateway/target/gateway-0.0.1-SNAPSHOT.jar' \
+	--tag gateway .
+
+docker run \
+	-d \
+	-p 8050:8050 \
+	--name gateway \
+	--network chouille-planner \
+	gateway
+
+
+cd user && ./mvnw clean install package && cd ..
+
+docker build \
+	-t springio/gs-spring-boot-docker \
+	--build-arg TARGET='user/target/audreybr-0.0.1-SNAPSHOT.jar' \
+	--tag chouille-planner .
+
+docker run \
+	-d \
+	-p 8082:8082 \
+	--name chouille-planner \
+	--network chouille-planner \
+	chouille-planner
