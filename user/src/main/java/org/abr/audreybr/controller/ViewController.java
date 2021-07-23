@@ -3,9 +3,11 @@ package org.abr.audreybr.controller;
 import javassist.NotFoundException;
 import org.abr.audreybr.dto.ChouilleDTO;
 import org.abr.audreybr.entity.Chouille;
+import org.abr.audreybr.entity.Item;
 import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.entity.Person;
 import org.abr.audreybr.service.ChouilleService;
+import org.abr.audreybr.service.ItemService;
 import org.abr.audreybr.service.LocationService;
 
 import org.abr.audreybr.service.PersonService;
@@ -15,10 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ViewController {
@@ -29,6 +29,8 @@ public class ViewController {
     private LocationService serviceLocation;
     @Autowired
     private ChouilleService serviceChouille;
+    @Autowired
+    private ItemService serviceItem;
 
     @GetMapping(path = "/profil/{id}")
     public String index(@PathVariable Integer id, Model model) throws NotFoundException {
@@ -73,10 +75,22 @@ public class ViewController {
     public String getChouillesWhereIamInvited(@PathVariable("id") int id, Model model) throws NotFoundException {
         Person person = servicePerson.getPerson(id);
         model.addAttribute("person",person);
-        /*List<Chouille> chouilles = serviceChouille.getChouillesWhereIamInvited(id);
+        java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        List<Chouille> chouilles = serviceChouille.getChouillesByGuest(person).stream().filter(chouille -> {return chouille.getDate().compareTo(now) > 0 ;}).collect(Collectors.toList());
         model.addAttribute("chouilles",chouilles);
-        */return "chouilles_other";
+
+        return "chouilles_other";
     }
 
+    @GetMapping("/stock/{id}/{id2}")
+    public String getItemsByChouilleAndPerson(@PathVariable("id") Integer id, @PathVariable("id2") Integer id2, Model model) throws NotFoundException {
+        Person person = servicePerson.getPerson(id);
+        Chouille chouille = serviceChouille.getChouille(id2);
+        List<Item> items = serviceItem.getItemByPersonAndChouille(person, chouille);
+        model.addAttribute("items", items);
+        model.addAttribute("chouille", chouille);
+        model.addAttribute("person", person);
+        return "update_item";
+    }
 
 }

@@ -5,21 +5,21 @@
     <title>ajouter un lieu</title>
 </head>
 <body>
-<div th:fragment="add_location(id_person)">
+<div class="modal" th:fragment="add_location(id_person)">
+    <p class="close-modal">X</p>
     <h2>Ajout Lieu de Chouille</h2>
     <form action="#"
         th:action="@{/location/create/{id}(id=${person.Id_Person})}"
-        th:method="post"
-        th:object="${location}" >
+        th:method="post" >
         <div>
             <label for="address">Adresse :</label>
             <input id="address" type="text" placeholder="7, rue de la soif"
-               th:field="*{Adress}" />
+               th:name="adress" />
         </div>
         <div>
             <label for="nbmax">Nombre de personnes maximal :</label>
             <input id="nbmax" type="number"
-                   th:field="*{Max_Pers}" />
+                   th:name="max_Pers" />
         </div>
         <input type="submit" value="Ajouter" />
     </form>

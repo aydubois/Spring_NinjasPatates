@@ -1,5 +1,6 @@
 package org.abr.audreybr.service;
 
+import io.swagger.models.auth.In;
 import org.abr.audreybr.dao.PersonRepository;
 import org.abr.audreybr.entity.Location;
 import org.abr.audreybr.entity.Person;
@@ -48,6 +49,21 @@ public class LocationService {
         return newLocation;
     }
 
+    public Location createLocationBase(Person host, String adress, Integer max_Pers){
+        if (adress == null ||
+                max_Pers == null ||
+                host == null) {
+            throw new BadRequestException("Input values can't be empty");
+        }
+        Location newLocation = new Location();
+
+        newLocation.setAdress(adress);
+        newLocation.setMax_Pers(max_Pers);
+        newLocation.setHost(host);
+
+        repository.save(newLocation);
+        return newLocation;
+    }
     public Location getLocation(Integer id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Cette location n'existe pas"));
     }

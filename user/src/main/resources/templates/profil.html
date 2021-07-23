@@ -9,6 +9,8 @@
 <body>
 
     <div th:replace="~{fragments/header :: header1(${person.id_Person})}"></div>
+    <div style="display:none" id="modal_add_location" class="background-modal" th:insert="~{fragments/add_location :: add_location(${person.id_Person})}"></div>
+
     <main>
         <section>
             <form
@@ -48,7 +50,7 @@
                                 th:name="max_Pers" th:value="${loc.max_Pers}"/>
                         <div>
                             <input type="submit" value="modifier" />
-                            <button class="delete-location">Supprimer</button> <!--TODO: faire ajax ?? -->
+                            <button class="delete-location"><a th:href="@{/location/delete/{id}(id=${loc.id_Location})}">Supprimer</a></button> <!--TODO: faire ajax ?? -->
                         </div>
                     </div>
                 </form>
@@ -56,7 +58,7 @@
             <th:block th:if="${locations.isEmpty()}" >
                 <p>Aucun lieu de renseigné pour le moment</p>
             </th:block>
-            <button>Ajouter un nouveau lieu</button>
+            <button id="open_modal_add_location">Ajouter un nouveau lieu</button>
 
         </section>
         <section class="history">
@@ -65,11 +67,29 @@
                 <article th:if="${!chouilles.isEmpty()}" th:each="chouille : ${chouilles}">
                     <p>Thème : <span th:text="${chouille.thematic}"></span></p>
                     <p>Date : <span th:text="${chouille.date}"></span></p>
-                    <!--TODO: voir comment récupérer locaion adress à partir de chouille-->
-                   <!-- <p>Lieu : ${chouille.Location.Adress}</p>-->
+                    <p>Lieu : <span th:text="${chouille.location.adress}"></span></p>
+                    <ul>Invités :
+                        <li th:each="guest : ${chouille.guests}" th:text="${guest.username}"></li>
+                    </ul>
 
                 </article>
             </div>
         </section>
     </main>
 </body>
+<script type="text/javascript">
+    let button_open_modal_add_location = document.querySelector("#open_modal_add_location")
+    let button_close_modal_add_location = document.querySelector(".close-modal")
+    let modal_add_location = document.querySelector("#modal_add_location")
+
+    if(button_open_modal_add_location){
+        button_open_modal_add_location.addEventListener('click',(e)=>{
+            modal_add_location.style.display = 'block'
+        })
+    }
+    if(button_close_modal_add_location){
+        button_close_modal_add_location.addEventListener('click',(e)=>{
+            modal_add_location.style.display = 'none'
+        })
+    }
+</script>
